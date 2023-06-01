@@ -1,0 +1,25 @@
+.mySwiper {
+	max-width: 46vw !important;
+	@media (min-width: 400px) and (max-width: 550px) {
+		max-width: 56vw !important;
+	}
+	@media (min-width: 400px) and (max-width: 550px) {
+		max-width: 56vw !important;
+	}
+	@media (min-width: 550px) {
+		max-width: 68vw !important;
+	}
+	@media (min-width: 700px) {
+		max-width: 50vw !important;
+	}
+	@media (min-width: 1000px) {
+		max-width: 40vw !important;
+	}
+
+	margin-left: 0;
+	margin-right: 0;
+
+	.swiper-slide {
+		text-align: center;
+	}
+}
