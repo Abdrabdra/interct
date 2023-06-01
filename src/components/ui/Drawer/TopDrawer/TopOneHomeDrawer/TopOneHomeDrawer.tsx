@@ -29,7 +29,8 @@ const TopOneHomeDrawer = ({ path }: any) => {
 
 	const handleCopy = () => {
 		navigator.clipboard.writeText(
-			`http://avtolike.kz/app/home/one/${pathname?.params?.announceId}`
+			``
+			// `http://avtolike.kz/app/home/one/${pathname?.params?.announceId}`
 		)
 	}
 

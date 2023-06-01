@@ -24,7 +24,7 @@ const TopPostDrawer = () => {
 					textAlign={"center"}
 					sx={{ fontWeight: 500, fontSize: "24px" }}
 				>
-					AVTO LIKE
+					InterCT
 				</Typography>
 			) : (
 				<GoBackButton forPost={true} />

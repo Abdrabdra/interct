@@ -115,7 +115,7 @@ const PostStepper = () => {
 						) : activeStep === 15 ? (
 							<PostServices />
 						) : (
-							<Box>AvtoLike</Box>
+							<Box>InterCT</Box>
 						)}
 					</React.Suspense>
 				</Box>

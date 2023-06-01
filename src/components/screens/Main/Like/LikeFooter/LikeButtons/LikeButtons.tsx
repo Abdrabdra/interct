@@ -18,7 +18,8 @@ interface Props {
 
 const LikeButtons: FC<Props> = ({ data }) => {
 	const handleCopy = () => {
-		navigator.clipboard.writeText(`http://avtolike.kz/app/home/one/${data.id}`)
+		navigator.clipboard.writeText(``)
+		// navigator.clipboard.writeText(`http://avtolike.kz/app/home/one/${data.id}`)
 	}
 
 	const { data: oneData } = useGetOneAnnouncementQuery(String(data.id))

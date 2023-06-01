@@ -20,7 +20,7 @@ const LoginHeadBox = () => {
 					marginBottom: "50px"
 				}}
 			>
-				<img src={AuthLogo} alt={"Auto Like"} />
+				<img src={AuthLogo} alt={"InterCT"} />
 			</Box>
 			<Box sx={{ display: "flex", justifyContent: "center" }}>
 				<img src={AuthBg} alt={"Auth Background"} />
