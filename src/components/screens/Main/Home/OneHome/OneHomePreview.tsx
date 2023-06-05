@@ -35,25 +35,25 @@ interface Props {
 }
 
 const OneHomePreview: FC<any> = ({ data }) => {
-	const details = {
-		city: data.details.city ? data.details.city : "",
-		generation: data.details?.generation,
-		body: data?.details.body ? data.details.body : "",
-		volume: data?.details.volume ? data.details.volume : "",
-		mileage: data?.details.mileage ? data.details.mileage : "",
-		transmission: "Коробка Передач",
-		driveUnit: data?.details.driveUnit ? data.details.driveUnit : "",
-		steeringWheel: data?.details.steeringWheel
-			? data.details.steeringWheel
-			: "",
-		color: data.details?.color,
-		customsClearance: data?.details.customsClearance
-			? data?.details.customsClearance
-			: "",
-		state: data?.details.state ? data.details.state : ""
-	}
+	// const details = {
+	// 	city: data.details.city ? data.details.city : "",
+	// 	generation: data.details?.generation,
+	// 	body: data?.details.body ? data.details.body : "",
+	// 	volume: data?.details.volume ? data.details.volume : "",
+	// 	mileage: data?.details.mileage ? data.details.mileage : "",
+	// 	transmission: "Коробка Передач",
+	// 	driveUnit: data?.details.driveUnit ? data.details.driveUnit : "",
+	// 	steeringWheel: data?.details.steeringWheel
+	// 		? data.details.steeringWheel
+	// 		: "",
+	// 	color: data.details?.color,
+	// 	customsClearance: data?.details.customsClearance
+	// 		? data?.details.customsClearance
+	// 		: "",
+	// 	state: data?.details.state ? data.details.state : ""
+	// }
 
-	const tagsData = useTypedSelector((state) => state.stepper.form.selectedTags)
+	// const tagsData = useTypedSelector((state) => state.stepper.form.selectedTags)
 
 	return (
 		<Box>
@@ -66,9 +66,9 @@ const OneHomePreview: FC<any> = ({ data }) => {
 						price={data.price}
 						phone={data.phone}
 					/>
-					<DoubleTab forPreview commentsCount={99} details={details} />
+					{/* <DoubleTab forPreview commentsCount={99} details={details} /> */}
 					<Description description={`${data.description}`} />
-					<OptionBox data={tagsData} />
+					{/* <OptionBox data={} /> */}
 				</Stack>
 			</Container>
 		</Box>

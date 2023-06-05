@@ -5,13 +5,16 @@ import {
 	ILikeAnnouncement
 } from "types/Announcement/Announcement.type"
 import { IOneAnnouncementResponse } from "types/Announcement/OneAnnouncement.type"
+import { IPlaceType } from "types/IPlace/IPlace"
+import { ISession } from "types/Session/ISession"
+import { ICity } from "types/ICity"
 
 export const announcementEndpoints = announcementApi.injectEndpoints({
 	endpoints: (builder) => ({
 		getAnnouncements: builder.query<IAnnouncementsResponse, any>({
 			query: (arg) => {
 				return {
-					url: arg.profileId ? `/announcement/admin` : `/announcement`,
+					url: `/session`,
 					params: { ...arg }
 				}
 			},
@@ -47,6 +50,56 @@ export const announcementEndpoints = announcementApi.injectEndpoints({
 				body
 			}),
 			invalidatesTags: ["announcements"]
+		}),
+
+		// Place
+		getPlaceType: builder.query<IPlaceType[], any>({
+			query: () => ({
+				url: `place/type`,
+				method: "GET"
+			}),
+			providesTags: ["place"]
+		}),
+
+		// Bus
+		createBus: builder.mutation<
+			any,
+			{ number: string; typeId?: number; image: string }
+		>({
+			query: (arg) => {
+				const formData = new FormData()
+
+				formData.append("number", String(arg.number))
+				formData.append("typeId", String(arg.typeId))
+				formData.append("image", String(arg.image))
+
+				return {
+					url: `/bus`,
+					method: "POST",
+					body: formData
+				}
+			},
+			invalidatesTags: ["bus"]
+		}),
+
+		// Session
+		createSession: builder.mutation<any, ISession>({
+			query: (arg) => {
+				return {
+					url: `/session`,
+					method: "POST",
+					body: arg
+				}
+			},
+			invalidatesTags: ["session"]
+		}),
+
+		// City
+		getCity: builder.query<ICity[], any>({
+			query: () => ({
+				url: `city`
+			}),
+			providesTags: ["city"]
 		})
 	})
 })
@@ -56,5 +109,17 @@ export const {
 	useGetAdminAnnouncementsQuery,
 	useLikeAnnouncementMutation,
 	useGetOneAnnouncementQuery,
-	useCreateAnnouncementMutation
+	useCreateAnnouncementMutation,
+
+	// place
+	useGetPlaceTypeQuery,
+
+	// Bus
+	useCreateBusMutation,
+
+	// Session
+	useCreateSessionMutation,
+
+	// City
+	useGetCityQuery
 } = announcementEndpoints

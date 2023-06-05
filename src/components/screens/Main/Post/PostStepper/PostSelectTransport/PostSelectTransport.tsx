@@ -1,71 +1,99 @@
-import * as React from "react"
-import Accordion from "@mui/material/Accordion"
-import AccordionDetails from "@mui/material/AccordionDetails"
-import AccordionSummary from "@mui/material/AccordionSummary"
-import Typography from "@mui/material/Typography"
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
-import { Box, Divider, Stack } from "@mui/material"
-
-import SelectTransportForm from "./SelectTransportForm"
-import SelectSparesForm from "./SelectSparesForm"
 import AbsoluteBox from "@components/modules/AbsoluteBox"
+import { MainButton } from "@components/ui/Button"
 import SubmitButton from "@components/ui/Button/SubmitButton"
+import { StyledMainInput } from "@components/ui/Input"
+import {
+	FormControl,
+	InputLabel,
+	MenuItem,
+	Select,
+	SelectChangeEvent
+} from "@mui/material"
+import { Typography } from "@mui/material"
+import { Box, Divider, Stack } from "@mui/material"
+import { incrementStep } from "@store/reducers/stepper/stepper.slice"
+import {
+	useCreateBusMutation,
+	useGetPlaceTypeQuery
+} from "@store/rtk-api/announcement-rtk/announcementEndpoints"
+import { useFormik } from "formik"
+import React from "react"
+import { useDispatch } from "react-redux"
+import UploadFile from "./UploadFile"
 
 const PostSelectTransport = () => {
-	const [expanded, setExpanded] = React.useState<string | false>("panel1")
+	const [value, setValue] = React.useState("")
 
-	const handleChange =
-		(panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
-			setExpanded(isExpanded ? panel : false)
+	const { data } = useGetPlaceTypeQuery("")
+	const [create] = useCreateBusMutation()
+
+	const formik = useFormik({
+		initialValues: { number: "", typeId: undefined, image: "" },
+		onSubmit: (values) => {
+			values.typeId && create(values)
 		}
+	})
+
+	const { handleSubmit, values, handleChange, setFieldValue } = formik
+
+	const handleSelectChange = (event: SelectChangeEvent) => {
+		setValue(event.target.value as string)
+		setFieldValue("typeId", event.target.value)
+	}
+
+	const handleSetImage = (value: File) => {
+		setFieldValue("image", value)
+	}
+
+	const dispatch = useDispatch()
+
+	const handleSelectImages = () => {
+		dispatch(incrementStep())
+	}
 
 	return (
-		<Stack spacing={1.25}>
-			<Accordion
-				disableGutters
-				expanded={expanded === "panel1"}
-				onChange={handleChange("panel1")}
-			>
-				<AccordionSummary
-					expandIcon={<ExpandMoreIcon />}
-					aria-controls="panel1bh-content"
-					id="panel1bh-header"
-				>
-					<Typography sx={{ fontSize: "18px", fontWeight: 600 }}>
-						Машины
-					</Typography>
-				</AccordionSummary>
-				<Divider variant="middle" />
-				<AccordionDetails>
-					<SelectTransportForm expanded={expanded} />
-				</AccordionDetails>
-			</Accordion>
+		<form onSubmit={handleSubmit}>
+			<Stack spacing={1.25}>
+				<StyledMainInput
+					label="Гос. Номер"
+					value={values.number}
+					onChange={handleChange}
+					name={"number"}
+				/>
 
-			<Accordion
-				expanded={expanded === "panel2"}
-				onChange={handleChange("panel2")}
-			>
-				<AccordionSummary
-					expandIcon={<ExpandMoreIcon />}
-					aria-controls="panel2bh-content"
-					id="panel2bh-header"
-				>
-					<Typography sx={{ fontSize: "18px", fontWeight: 600 }}>
-						Запчасти
-					</Typography>
-				</AccordionSummary>
-				<Divider variant="middle" />
-				<AccordionDetails>
-					<SelectSparesForm expanded={expanded} />
-				</AccordionDetails>
-			</Accordion>
+				<Box sx={{ minWidth: 150 }}>
+					<FormControl fullWidth>
+						<InputLabel id="demo-simple-select-label">TypeId</InputLabel>
+						<Select
+							labelId="demo-simple-select-label"
+							id="demo-simple-select"
+							value={value}
+							label="TypeId"
+							onChange={handleSelectChange}
+						>
+							{data?.map((row) => (
+								<MenuItem key={row.id} value={row.id}>
+									<Stack>
+										<Typography>Название: {row.title}</Typography>
+										<Typography>Цена: {row.cost}</Typography>
+									</Stack>
+								</MenuItem>
+							))}
+						</Select>
+					</FormControl>
+				</Box>
 
-			<Box sx={{ display: expanded === false ? "initial" : "none" }}>
-				<AbsoluteBox>
-					<SubmitButton type="submit" disabled={expanded === false && true} />
-				</AbsoluteBox>
-			</Box>
-		</Stack>
+				<UploadFile handleSetImage={handleSetImage} />
+
+				<MainButton type="submit">Создать</MainButton>
+
+				<Box>
+					<AbsoluteBox>
+						<SubmitButton onClick={handleSelectImages} />
+					</AbsoluteBox>
+				</Box>
+			</Stack>
+		</form>
 	)
 }
 

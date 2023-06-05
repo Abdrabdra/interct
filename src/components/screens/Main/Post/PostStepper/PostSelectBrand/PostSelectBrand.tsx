@@ -4,32 +4,25 @@ import { Box, InputAdornment, Stack } from "@mui/material"
 import SearchIcon from "@mui/icons-material/Search"
 
 import { StyledMainInput } from "@components/ui/Input"
-import BrandList from "./BrandList"
+import SessionCreate from "./SessionCreate"
+import AbsoluteBox from "@components/modules/AbsoluteBox"
+import SubmitButton from "@components/ui/Button/SubmitButton"
+import { useDispatch } from "react-redux"
+import { incrementStep } from "@store/reducers/stepper/stepper.slice"
 
 const PostSelectBrand = () => {
-	const [searchValue, setSearchValue] = useState("")
+	const dispatch = useDispatch()
 
-	const handleChange = (e: any) => {
-		setSearchValue(e.target.value)
+	const handleSelectImages = () => {
+		dispatch(incrementStep())
 	}
 
 	return (
-		<Stack spacing={1.8}>
-			<Box sx={{ display: "flex", direction: "column" }}>
-				<StyledMainInput
-					value={searchValue}
-					onChange={(e) => handleChange(e)}
-					placeholder="Поиск"
-					InputProps={{
-						startAdornment: (
-							<InputAdornment position="start">
-								<SearchIcon />
-							</InputAdornment>
-						)
-					}}
-				/>
-			</Box>
-			<BrandList searchValue={searchValue} />
+		<Stack>
+			<SessionCreate />
+			<AbsoluteBox>
+				<SubmitButton onClick={handleSelectImages} />
+			</AbsoluteBox>
 		</Stack>
 	)
 }

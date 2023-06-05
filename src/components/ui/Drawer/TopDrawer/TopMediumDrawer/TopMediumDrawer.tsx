@@ -10,7 +10,7 @@ import MediumNavigation from './MediumNavigation'
 const TopMediumDrawer = () => {
 	return (
 		<Stack direction='row' justifyContent={'space-between'} alignItems={'center'} spacing={2} sx={{ flex: '1' }}>
-			<Box
+			{/* <Box
 				component='img'
 				sx={{
 					width: 180,
@@ -18,7 +18,7 @@ const TopMediumDrawer = () => {
 				}}
 				alt='Logo'
 				src={mdLogo}
-			/>
+			/> */}
 			<MediumNavigation />
 			<NavLink
 				to={'profile'}

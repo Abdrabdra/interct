@@ -32,7 +32,6 @@ const RegistrationForm = () => {
 
 	const formik = useFormik({
 		initialValues: {
-			regName: "",
 			regPhone: "",
 			regPassword: ""
 		},
@@ -40,7 +39,6 @@ const RegistrationForm = () => {
 			try {
 				await dispatch(
 					registration({
-						name: values.regName,
 						phone: values.regPhone,
 						password: values.regPassword
 					} as IRegistration)
@@ -55,7 +53,7 @@ const RegistrationForm = () => {
 	})
 
 	const { values, errors, handleChange, handleSubmit } = formik
-	const { regName, regPhone, regPassword } = values
+	const { regPhone, regPassword } = values
 
 	const inputRef = useRef<HTMLInputElement>(null)
 
@@ -72,20 +70,6 @@ const RegistrationForm = () => {
 		>
 			<Stack spacing={3} sx={{ width: "500px" }}>
 				<Stack spacing={2}>
-					<Stack>
-						<StyledMainInput
-							label="Имя пользователя"
-							bgcolor="secondary.600"
-							ref={inputRef}
-							name="regName"
-							value={regName}
-							onChange={handleChange}
-							placeholder="Имя пользователя"
-						/>
-						{errors.regName && (
-							<Typography color="error">{errors.regName}</Typography>
-						)}
-					</Stack>
 					<Stack>
 						<StyledMainInput
 							label="Номер телефона"

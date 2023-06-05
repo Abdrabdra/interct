@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom"
 import ArrowBackIosNewRoundedIcon from "@mui/icons-material/ArrowBackIosNewRounded"
 import {
 	decrementStep,
-	setDefaultState
+	resetStepper
 } from "@store/reducers/stepper/stepper.slice"
 import { RootState, useTypedSelector } from "@store/index"
 
@@ -50,7 +50,7 @@ const GoBackButton: FC<GoBackButtonProps> = ({ forPost }) => {
 	const handlePostClick = () => {
 		if (currentStep === 0) {
 			handleClick()
-			dispatch(setDefaultState())
+			dispatch(resetStepper())
 		} else {
 			dispatch(decrementStep())
 		}

@@ -5,7 +5,7 @@ import { Box, Stack, Typography } from "@mui/material"
 import {
 	incrementStep,
 	resetStep,
-	setDefaultState
+	resetStepper
 } from "@store/reducers/stepper/stepper.slice"
 
 import { MainButton } from "@components/ui/Button"
@@ -25,7 +25,7 @@ const PostVerificationResult: FC<Props> = ({ error }) => {
 
 	const handleClick = () => {
 		if (error) {
-			dispatch(setDefaultState())
+			dispatch(resetStepper())
 			navigate("/app/home")
 			dispatch(resetStep())
 			return

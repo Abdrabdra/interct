@@ -11,27 +11,12 @@ import {
 } from "@store/reducers/stepper/stepper.slice"
 
 import { STEP_TITLES } from "./PostStepper.constants"
-import PostServices from "./PostServices"
+import PostSelectCityFrom from "./PostSelectCityFrom"
 
 const PostStepperHead = React.lazy(() => import("./PostStepperHead"))
 const PostSelectTransport = React.lazy(() => import("./PostSelectTransport"))
 const PostSelectBrand = React.lazy(() => import("./PostSelectBrand"))
-const PostSelectMark = React.lazy(() => import("./PostSelectMark"))
-const PostSelectManufacture = React.lazy(
-	() => import("./PostSelectManufacture")
-)
-const PostSelectCase = React.lazy(() => import("./PostSelectCase"))
-const PostSelectGeneration = React.lazy(() => import("./PostSelectGeneration"))
-const PostSelectModification = React.lazy(
-	() => import("./PostSelectModification")
-)
-const PostSelectCondition = React.lazy(() => import("./PostSelectCondition"))
-const PostSelectPrice = React.lazy(() => import("./PostSelectPrice"))
-const PostSelectPicture = React.lazy(() => import("./PostSelectPicture"))
-const PostSelectTags = React.lazy(() => import("./PostSelectTags"))
-const PostCity = React.lazy(() => import("./PostCity"))
 
-const PostSelectContacts = React.lazy(() => import("./PostSelectContacts"))
 const PostPreview = React.lazy(() => import("./PostPreview"))
 const PostVerification = React.lazy(() => import("./PostVerification"))
 
@@ -87,33 +72,11 @@ const PostStepper = () => {
 						) : activeStep === 1 ? (
 							<PostSelectBrand />
 						) : activeStep === 2 ? (
-							<PostSelectMark />
+							<PostSelectCityFrom />
 						) : activeStep === 3 ? (
-							<PostSelectManufacture />
-						) : activeStep === 4 ? (
-							<PostSelectCase />
-						) : activeStep === 5 ? (
-							<PostSelectGeneration />
-						) : activeStep === 6 ? (
-							<PostSelectModification />
-						) : activeStep === 7 ? (
-							<PostSelectCondition />
-						) : activeStep === 8 ? (
-							<PostSelectPrice />
-						) : activeStep === 9 ? (
-							<PostSelectPicture />
-						) : activeStep === 10 ? (
-							<PostSelectTags />
-						) : activeStep === 11 ? (
-							<PostCity />
-						) : activeStep === 12 ? (
-							<PostSelectContacts />
-						) : activeStep === 13 ? (
 							<PostPreview />
-						) : activeStep === 14 ? (
+						) : activeStep === 4 ? (
 							<PostVerification />
-						) : activeStep === 15 ? (
-							<PostServices />
 						) : (
 							<Box>InterCT</Box>
 						)}

@@ -17,19 +17,20 @@ interface Props {
 }
 
 const ImageBox: FC<Props> = ({ images, forPreview }) => {
-	const selectedImages = useTypedSelector(
-		(state: RootState) => state.stepper.form.selectedPicture
-	)
+	// const selectedImages = useTypedSelector(
+	// 	(state: RootState) => state.stepper.form.selectedPicture
+	// )
 
 	return (
 		<Box sx={{ backgroundColor: "grey.0" }}>
 			<Swiper spaceBetween={50} slidesPerView={1} loop={true}>
 				{forPreview
-					? selectedImages.map((row, index) => (
-							<SwiperSlide key={index}>
-								<ImageBoxOne image={row} />
-							</SwiperSlide>
-					  ))
+					? ""
+				// 	selectedImages.map((row, index) => (
+				// 		<SwiperSlide key={index}>
+				// 			<ImageBoxOne image={row} />
+				// 		</SwiperSlide>
+				//   ))
 					: images?.map((row, index) => (
 							<SwiperSlide key={index}>
 								<ImageBoxModal data={images} image={row} />
