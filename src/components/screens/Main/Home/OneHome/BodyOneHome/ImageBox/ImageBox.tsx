@@ -1,4 +1,4 @@
-import { FC, useState } from "react"
+import { FC, useEffect, useState } from "react"
 import { Box, Button, Stack } from "@mui/material"
 import { Swiper, SwiperSlide } from "swiper/react"
 
@@ -18,7 +18,10 @@ interface Props {
 }
 
 const ImageBox: FC<Props> = ({ images, forPreview }) => {
-	const { data } = useGetUserMeQuery("")
+	const { data, refetch } = useGetUserMeQuery("")
+	useEffect(() => {
+		refetch()
+	}, [])
 
 	return (
 		<Box sx={{ backgroundColor: "grey.0" }}>

@@ -7,6 +7,9 @@ import { Button } from "@mui/material"
 
 import AirportShuttleIcon from "@mui/icons-material/AirportShuttle"
 
+const MAPBOX_TOKEN =
+	"pk.eyJ1IjoidXNlcmJla292IiwiYSI6ImNsaWpnYjRteTAzYXEzY3FjMHF3YWZuNzMifQ.zY6h_VkjnW_cDHCTOkbjcA"
+
 const MapBox = () => {
 	const [viewport, setViewport] = useState<{
 		latitude?: number
@@ -40,7 +43,7 @@ const MapBox = () => {
 		<div style={{ height: "500px", width: "100%" }}>
 			{viewport.latitude && (
 				<Map
-					mapboxAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+					mapboxAccessToken={MAPBOX_TOKEN}
 					// {...viewport}
 					initialViewState={viewport}
 					// @ts-ignore
