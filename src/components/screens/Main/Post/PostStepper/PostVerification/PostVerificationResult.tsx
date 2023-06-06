@@ -24,14 +24,9 @@ const PostVerificationResult: FC<Props> = ({ error }) => {
 	const navigate = useNavigate()
 
 	const handleClick = () => {
-		if (error) {
-			dispatch(resetStepper())
-			navigate("/app/home")
-			dispatch(resetStep())
-			return
-		}
-
-		return dispatch(incrementStep())
+		dispatch(resetStepper())
+		navigate("/app/home")
+		dispatch(resetStep())
 	}
 
 	return (

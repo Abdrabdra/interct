@@ -1,9 +1,9 @@
-import {
-	DriveIUnitEnum,
-	StatementEnum,
-	TypeofEntityEnum,
-	WheelEnum
-} from "types/enums"
+// import {
+// 	DriveIUnitEnum,
+// 	StatementEnum,
+// 	TypeofEntityEnum,
+// 	WheelEnum
+// } from "types/enums"
 
 export interface IAnnouncementsResponse {
 	data: IAnnouncement[]
@@ -20,9 +20,9 @@ export interface IAnnouncement {
 	avatar: null | string
 	year: number
 	mileage: number
-	steeringWheel: WheelEnum
+	// steeringWheel: WheelEnum
 	volume: number
-	state: StatementEnum
+	// state: StatementEnum
 	marka: string
 	city: string
 	body: string
@@ -33,7 +33,7 @@ export interface IAnnouncement {
 
 export interface ILikeAnnouncement {
 	announcementId: number
-	kind: TypeofEntityEnum
+	// kind: TypeofEntityEnum
 }
 
 export interface ICreateAnnouncement {
@@ -43,14 +43,14 @@ export interface ICreateAnnouncement {
 	price: number
 	description: string
 	tags: string // string[] type
-	steeringWheel: WheelEnum
+	// steeringWheel: WheelEnum
 	markaId: number
 	modelId: number
 	generationId: number
 	bodyTypeId: number
 	cityId: number
-	state: StatementEnum
+	// state: StatementEnum
 	transmissionId: number
-	driveUnit: DriveIUnitEnum
+	// driveUnit: DriveIUnitEnum
 	customsClearance: boolean
 }

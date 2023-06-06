@@ -17,7 +17,7 @@ import {
 	useGetPlaceTypeQuery
 } from "@store/rtk-api/announcement-rtk/announcementEndpoints"
 import { useFormik } from "formik"
-import React from "react"
+import React, { useState } from "react"
 import { useDispatch } from "react-redux"
 import UploadFile from "./UploadFile"
 
@@ -30,7 +30,13 @@ const PostSelectTransport = () => {
 	const formik = useFormik({
 		initialValues: { number: "", typeId: undefined, image: "" },
 		onSubmit: (values) => {
-			values.typeId && create(values)
+			values.typeId &&
+				imageFile &&
+				create({
+					number: values.number,
+					typeId: values.typeId,
+					image: imageFile
+				})
 		}
 	})
 
@@ -41,8 +47,10 @@ const PostSelectTransport = () => {
 		setFieldValue("typeId", event.target.value)
 	}
 
+	const [imageFile, setImageFile] = useState<File | undefined>()
+
 	const handleSetImage = (value: File) => {
-		setFieldValue("image", value)
+		setImageFile(value)
 	}
 
 	const dispatch = useDispatch()

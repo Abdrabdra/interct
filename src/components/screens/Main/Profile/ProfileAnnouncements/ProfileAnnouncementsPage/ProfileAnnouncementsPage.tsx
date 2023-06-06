@@ -3,7 +3,7 @@ import TabPanel, { a11yProps } from "@components/ui/Tab/TabPanel/TabPanel"
 import { Box, Tab, Tabs } from "@mui/material"
 import { Container, Stack, Typography } from "@mui/material"
 import { useState } from "react"
-import { Status } from "types/enums"
+// import { Status } from "types/enums"
 
 const ProfileAnnouncementsPage = () => {
 	const [value, setValue] = useState(0)
@@ -33,16 +33,17 @@ const ProfileAnnouncementsPage = () => {
 						</Tabs>
 					</Box>
 					<TabPanel value={value} index={0}>
-						<ContentList forMyAnnouncements={Status.ACCEPTED} />
+						<ContentList />
 					</TabPanel>
 					<TabPanel value={value} index={1}>
-						<ContentList forMyAnnouncements={Status.NEW} />
+						<ContentList />
+						{/* <ContentList forMyAnnouncements={Status.NEW} /> */}
 					</TabPanel>
 					<TabPanel value={value} index={2}>
-						<ContentList forMyAnnouncements={Status.ARCHIVED} />
+						<ContentList />
 					</TabPanel>
 					<TabPanel value={value} index={3}>
-						<ContentList forMyAnnouncements={Status.DENIED} />
+						<ContentList />
 					</TabPanel>
 				</Stack>
 			</Stack>

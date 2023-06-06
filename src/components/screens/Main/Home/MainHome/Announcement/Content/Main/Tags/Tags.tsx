@@ -14,11 +14,11 @@ import { Box, useMediaQuery } from "@mui/material"
 
 interface Props {
 	tags: {
-		year: number
-		state: string
-		mileage: number
+		year: string
+		state: number
+		mileage: string
 		body: string
-		volume: number
+		volume: string
 	}
 }
 
@@ -41,10 +41,10 @@ const Tags: FC<Props> = ({ tags }) => {
 					<OneTag tags>{year}</OneTag>
 				</SwiperSlide>
 				<SwiperSlide>
-					<OneTag tags>{state}</OneTag>
+					<OneTag tags>{state}KZT</OneTag>
 				</SwiperSlide>
 				<SwiperSlide>
-					<OneTag tags>{numberWithSpaces(mileage ? mileage : 0)}км</OneTag>
+					<OneTag tags>{mileage}</OneTag>
 				</SwiperSlide>
 				<SwiperSlide>
 					<OneTag tags>{body}</OneTag>

@@ -7,7 +7,7 @@ import { useTypedSelector } from "@store/index"
 import NeedAuthBox from "@components/modules/NeedAuthBox"
 import { useLikeAnnouncementMutation } from "@store/rtk-api/announcement-rtk/announcementEndpoints"
 import { useParams } from "react-router-dom"
-import { TypeofEntityEnum } from "types/enums"
+// import { TypeofEntityEnum } from "types/enums"
 import { useDispatch } from "react-redux"
 import { setAuth } from "@store/reducers/auth/auth.slice"
 
@@ -34,7 +34,7 @@ const TagBox: FC<Props> = ({ likesCount, isLike }) => {
 		if (token && isAuth && announceId) {
 			return likeAnnouncement({
 				announcementId: Number(announceId),
-				kind: TypeofEntityEnum.ANNOUNCEMENT
+				// kind: TypeofEntityEnum.ANNOUNCEMENT
 			})
 		}
 

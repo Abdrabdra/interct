@@ -15,8 +15,8 @@ import "swiper/css/navigation"
 import "./ImageBoxModal.style.scss"
 
 interface Props {
-	data: IOneImage[]
-	image: { id: number; image: string }
+	data?: string
+	image?: string
 }
 
 const ImageBoxModal: FC<Props> = ({ data, image }) => {
@@ -35,7 +35,7 @@ const ImageBoxModal: FC<Props> = ({ data, image }) => {
 			<Box
 				onClick={handleModalOpen}
 				component={"img"}
-				src={`${$image_api}${image.image}`}
+				src={`${$image_api}${image}`}
 				sx={{
 					width: "100%",
 					height: "200px",
@@ -85,28 +85,26 @@ const ImageBoxModal: FC<Props> = ({ data, image }) => {
 							// 	current.swiper = swiper
 							// }}
 						>
-							{data?.map((row, index) => (
-								<SwiperSlide>
-									<Stack
-										justifyContent={"center"}
-										alignItems="center"
-										sx={{ height: "100%" }}
-									>
-										<Box
-											component={"img"}
-											src={`${$image_api}${row.image}`}
-											sx={{
-												// width: "400px",
-												// height: "200px",
-												borderRadius: "20px",
-												backgroundRepeat: "no-repeat",
-												objectFit: "cover",
-												objectPosition: "center"
-											}}
-										/>
-									</Stack>
-								</SwiperSlide>
-							))}
+							<SwiperSlide>
+								<Stack
+									justifyContent={"center"}
+									alignItems="center"
+									sx={{ height: "100%" }}
+								>
+									<Box
+										component={"img"}
+										src={`${$image_api}${image}`}
+										sx={{
+											// width: "400px",
+											// height: "200px",
+											borderRadius: "20px",
+											backgroundRepeat: "no-repeat",
+											objectFit: "cover",
+											objectPosition: "center"
+										}}
+									/>
+								</Stack>
+							</SwiperSlide>
 							<div className="swiper-button-prev"></div>
 							<div className="swiper-button-next"></div>
 						</Swiper>

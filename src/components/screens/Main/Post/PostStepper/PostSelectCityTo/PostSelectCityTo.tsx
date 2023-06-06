@@ -16,8 +16,10 @@ import {
 } from "@mui/material"
 import { useTypedSelector } from "@store/index"
 import {
+	deleteStepFormDistrictsToIds,
 	incrementStep,
-	setStepForm
+	setStepForm,
+	setStepFormDistrictsToIds
 } from "@store/reducers/stepper/stepper.slice"
 import {
 	useGetCityQuery,
@@ -26,17 +28,18 @@ import {
 import React, { useEffect } from "react"
 import { useDispatch } from "react-redux"
 
-const PostSelectCityFrom = () => {
+const PostSelectCityTo = () => {
 	const { data } = useGetCityQuery("")
 
-	const prevCityFrom = useTypedSelector((state) => state.stepper.form.cityFrom)
+	const prevCityTo = useTypedSelector((state) => state.stepper.form.cityTo)
 
-	const [value, setValue] = React.useState(String(prevCityFrom))
+	const [value, setValue] = React.useState(String(prevCityTo))
 
 	const dispatch = useDispatch()
 	const handleChange = (event: SelectChangeEvent) => {
 		setValue(event.target.value)
-		dispatch(setStepForm({ cityFrom: event.target.value }))
+		dispatch(setStepForm({ cityTo: event.target.value }))
+		dispatch(setStepForm({ districtsToIds: [] }))
 	}
 
 	const handleSelectImages = () => {
@@ -47,14 +50,12 @@ const PostSelectCityFrom = () => {
 		<Stack spacing={2}>
 			<Box sx={{ minWidth: 150 }}>
 				<FormControl fullWidth>
-					<InputLabel id="demo-simple-select-label">
-						Город отправления
-					</InputLabel>
+					<InputLabel id="demo-simple-select-label">Город Прибытия</InputLabel>
 					<Select
 						labelId="demo-simple-select-label"
 						id="demo-simple-select"
 						value={value}
-						label="Город отправления"
+						label="Город прибытия"
 						onChange={handleChange}
 					>
 						{data?.map((row) => (
@@ -80,52 +81,55 @@ const PostSelectCityFrom = () => {
 	)
 }
 
-export default PostSelectCityFrom
+export default PostSelectCityTo
 
 const GetCitiesById: React.FC<{ cityId: string | number }> = ({ cityId }) => {
 	const { data } = useGetDistrictQuery(cityId)
-	const dispatch = useDispatch()
-
-	const prevCityFromId = useTypedSelector(
-		(state) => state.stepper.form.cityFrom
-	)
-	const prevDistrictFromId = useTypedSelector(
-		(state) => state.stepper.form.districtFromId
-	)
-
-	const [value, setValue] = React.useState<undefined | string>(
-		String(prevDistrictFromId)
-	)
-
-	useEffect(() => {
-		dispatch(setStepForm({ districtFromId: "" }))
-		setValue("")
-	}, [cityId])
-
-	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setValue((event.target as HTMLInputElement).value)
-		dispatch(setStepForm({ districtFromId: event.target.value }))
-	}
 
 	return (
 		<Stack>
-			{data && (
-				<RadioGroup
-					aria-labelledby="demo-controlled-radio-buttons-group"
-					name="controlled-radio-buttons-group"
-					value={value}
-					onChange={handleChange}
-				>
-					{data.map((row) => (
-						<FormControlLabel
-							key={row.id}
-							value={row.id}
-							control={<Radio  />}
-							label={row.title}
-						/>
-					))}
-				</RadioGroup>
-			)}
+			{data?.map((row) => (
+				<CheckBoxRow key={row.id} id={row.id} label={row.title} />
+			))}
 		</Stack>
+	)
+}
+
+const CheckBoxRow: React.FC<{ id: number; label: string }> = ({
+	id,
+	label
+}) => {
+	const dispatch = useDispatch()
+
+	const prevDistrictsToIds = useTypedSelector(
+		(state) => state.stepper.form.districtsToIds
+	)
+
+	const initialValue = prevDistrictsToIds.filter((row) => row === id)[0]
+
+	const [checked, setChecked] = React.useState(initialValue ? true : false)
+	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const { checked } = event.target
+
+		if (checked) {
+			dispatch(setStepFormDistrictsToIds(id))
+		} else {
+			dispatch(deleteStepFormDistrictsToIds(id))
+		}
+
+		setChecked(checked)
+	}
+
+	return (
+		<FormControlLabel
+			control={
+				<Checkbox
+					checked={checked}
+					onChange={handleChange}
+					inputProps={{ "aria-label": "controlled" }}
+				/>
+			}
+			label={label}
+		/>
 	)
 }

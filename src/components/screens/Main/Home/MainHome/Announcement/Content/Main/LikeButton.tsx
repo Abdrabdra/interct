@@ -5,7 +5,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder"
 import FavoriteIcon from "@mui/icons-material/Favorite"
 
 import { useLikeAnnouncementMutation } from "@store/rtk-api/announcement-rtk/announcementEndpoints"
-import { TypeofEntityEnum } from "types/enums"
+// import { TypeofEntityEnum } from "types/enums"
 import BaseModal from "@components/ui/Modal/BaseModal"
 import { useTypedSelector } from "@store/index"
 import NeedAuthBox from "@components/modules/NeedAuthBox"
@@ -32,7 +32,7 @@ const LikeButton: FC<Props> = ({ profilelike, id }) => {
 		const token = localStorage.getItem("access_token")
 
 		if (token && isAuth) {
-			return like({ announcementId: id, kind: TypeofEntityEnum.ANNOUNCEMENT })
+			// return like({ announcementId: id, kind: TypeofEntityEnum.ANNOUNCEMENT })
 		}
 
 		localStorage.removeItem("access_item")

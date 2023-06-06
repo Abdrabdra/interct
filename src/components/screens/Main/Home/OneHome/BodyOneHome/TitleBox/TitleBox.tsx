@@ -4,7 +4,7 @@ import numberWithSpaces from "@utils/numberWithSpaces"
 
 interface Props {
 	title: string
-	price: number
+	price?: number
 	phone?: string
 }
 

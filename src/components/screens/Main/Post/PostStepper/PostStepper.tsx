@@ -12,6 +12,7 @@ import {
 
 import { STEP_TITLES } from "./PostStepper.constants"
 import PostSelectCityFrom from "./PostSelectCityFrom"
+import PostSelectCityTo from "./PostSelectCityTo"
 
 const PostStepperHead = React.lazy(() => import("./PostStepperHead"))
 const PostSelectTransport = React.lazy(() => import("./PostSelectTransport"))
@@ -74,8 +75,10 @@ const PostStepper = () => {
 						) : activeStep === 2 ? (
 							<PostSelectCityFrom />
 						) : activeStep === 3 ? (
-							<PostPreview />
+							<PostSelectCityTo />
 						) : activeStep === 4 ? (
+							<PostPreview />
+						) : activeStep === 5 ? (
 							<PostVerification />
 						) : (
 							<Box>InterCT</Box>

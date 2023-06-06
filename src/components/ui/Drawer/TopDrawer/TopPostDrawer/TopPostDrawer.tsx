@@ -6,8 +6,6 @@ const TopPostDrawer = () => {
 	const currentStep = useTypedSelector((state) => state.stepper.step)
 	const stepperError = useTypedSelector((state) => state.stepper.error)
 
-	console.log(currentStep)
-	console.log(stepperError)
 
 	return (
 		<Stack

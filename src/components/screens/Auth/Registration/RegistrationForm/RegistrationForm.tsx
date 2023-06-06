@@ -36,6 +36,7 @@ const RegistrationForm = () => {
 			regPassword: ""
 		},
 		onSubmit: async (values) => {
+			console.log("asd")
 			try {
 				await dispatch(
 					registration({
@@ -47,7 +48,9 @@ const RegistrationForm = () => {
 				setTimeout(() => {
 					navigate("/auth/login")
 				}, 2000)
-			} catch (e) {}
+			} catch (e) {
+				console.log("error: ", e)
+			}
 		},
 		validationSchema: RegistrationSchema
 	})
@@ -60,8 +63,6 @@ const RegistrationForm = () => {
 	useEffect(() => {
 		if (inputRef.current) inputRef.current.focus()
 	}, [])
-
-	console.log("error: ", error)
 
 	return (
 		<form

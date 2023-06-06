@@ -6,12 +6,12 @@ import SubmitButton from "@components/ui/Button/SubmitButton"
 import OneHomePreview from "@components/screens/Main/Home/OneHome/OneHomePreview"
 
 import { RootState, useTypedSelector } from "@store/index"
+import { incrementStep } from "@store/reducers/stepper/stepper.slice"
 import {
-	incrementStep,
-} from "@store/reducers/stepper/stepper.slice"
-import { useCreateAnnouncementMutation } from "@store/rtk-api/announcement-rtk/announcementEndpoints"
+	useCreateAnnouncementMutation,
+	useCreateSessionMutation
+} from "@store/rtk-api/announcement-rtk/announcementEndpoints"
 
-import { WheelEnum } from "types/enums"
 import { MainButton } from "@components/ui/Button"
 import { useEffect } from "react"
 import SuspenseLoader from "@components/modules/SuspenseLoader"
@@ -19,15 +19,24 @@ import SuspenseLoader from "@components/modules/SuspenseLoader"
 const PostPreview = () => {
 	const dispatch = useDispatch()
 	const [create, { isLoading, isError, isSuccess, error, reset }] =
-		useCreateAnnouncementMutation()
+		useCreateSessionMutation()
 
 	const stepper = useTypedSelector((state: RootState) => state.stepper.form)
 
-	const formData = new FormData()
+	const form = useTypedSelector((state) => state.stepper.form)
 
 	const handleClick = () => {
-		create(formData)
+		create({
+			arrivalDate: form.arrivalDate,
+			arrivalTime: form.arrivalTime,
+			cityFromId: form.cityFrom,
+			cityToId: form.cityTo,
+			districtFromId: Number(form.districtFromId),
+			districtsToIds: form.districtsToIds
+		})
 	}
+
+	console.log("fd: ", form)
 
 	useEffect(() => {
 		if (isError) {
@@ -54,7 +63,7 @@ const PostPreview = () => {
 
 	return (
 		<Box>
-			{/* <OneHomePreview data={data} /> */}
+			<OneHomePreview data={""} />
 
 			{isLoading && <Box>ЗАГРУЗКА...</Box>}
 			{isSuccess && <Box>Успешно</Box>}

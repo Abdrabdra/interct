@@ -2,7 +2,7 @@ import { Formik } from "formik"
 import { Stack } from "@mui/material"
 import { useParams } from "react-router-dom"
 
-import { TypeofEntityEnum } from "types/enums"
+// import { TypeofEntityEnum } from "types/enums"
 
 import { useCreateCommentMutation } from "@store/rtk-api/comments-rtk/commentEndpoints"
 import { StyledMainInput } from "@components/ui/Input"
@@ -21,7 +21,7 @@ const CommentsTabCreate: FC<Props> = ({ parentCommentId }) => {
 		announcementId: Number(announceId),
 		parentCommentId: parentCommentId ? parentCommentId : undefined,
 		text: "",
-		kind: TypeofEntityEnum.ANNOUNCEMENT
+		// kind: TypeofEntityEnum.ANNOUNCEMENT
 	}
 
 	return (

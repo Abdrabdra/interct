@@ -10,7 +10,7 @@ import {
 	useGetOneAnnouncementQuery,
 	useLikeAnnouncementMutation
 } from "@store/rtk-api/announcement-rtk/announcementEndpoints"
-import { TypeofEntityEnum } from "types/enums"
+// import { TypeofEntityEnum } from "types/enums"
 
 interface Props {
 	data: IAnnouncement
@@ -27,7 +27,7 @@ const LikeButtons: FC<Props> = ({ data }) => {
 	const [like] = useLikeAnnouncementMutation()
 
 	const handleLike = () => {
-		like({ kind: TypeofEntityEnum.ANNOUNCEMENT, announcementId: data.id })
+		// like({ kind: TypeofEntityEnum.ANNOUNCEMENT, announcementId: data.id })
 	}
 
 	return (

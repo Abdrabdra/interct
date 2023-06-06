@@ -10,32 +10,28 @@ import { RootState, useTypedSelector } from "@store/index"
 import ImageBoxOne from "./ImageBoxOne"
 import ImageBoxModal from "./ImageBoxModal"
 import { IOneImage } from "types/Announcement/OneAnnouncement.type"
+import { useGetUserMeQuery } from "@store/rtk-api/user-rtk/userEndpoints"
 
 interface Props {
-	images?: IOneImage[]
+	images?: string
 	forPreview?: boolean
 }
 
 const ImageBox: FC<Props> = ({ images, forPreview }) => {
-	// const selectedImages = useTypedSelector(
-	// 	(state: RootState) => state.stepper.form.selectedPicture
-	// )
+	const { data } = useGetUserMeQuery("")
 
 	return (
 		<Box sx={{ backgroundColor: "grey.0" }}>
 			<Swiper spaceBetween={50} slidesPerView={1} loop={true}>
-				{forPreview
-					? ""
-				// 	selectedImages.map((row, index) => (
-				// 		<SwiperSlide key={index}>
-				// 			<ImageBoxOne image={row} />
-				// 		</SwiperSlide>
-				//   ))
-					: images?.map((row, index) => (
-							<SwiperSlide key={index}>
-								<ImageBoxModal data={images} image={row} />
-							</SwiperSlide>
-					  ))}
+				{forPreview ? (
+					<SwiperSlide>
+						<ImageBoxOne image={data?.bus?.image} />
+					</SwiperSlide>
+				) : (
+					<SwiperSlide>
+						<ImageBoxModal data={images} image={images} />
+					</SwiperSlide>
+				)}
 			</Swiper>
 		</Box>
 	)

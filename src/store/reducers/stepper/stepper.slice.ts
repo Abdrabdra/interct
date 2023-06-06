@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { DriveIUnitEnum, StatementEnum, WheelEnum } from "types/enums"
+// import { DriveIUnitEnum, StatementEnum, WheelEnum } from "types/enums"
 
 interface ITitle {
 	id?: number
@@ -20,8 +20,8 @@ interface IInitState {
 		cityTo?: number
 		cityFrom?: number
 
-		districtsToIds?: [string]
-		districtFromId?: number
+		districtsToIds: number[]
+		districtFromId: string
 	}
 }
 
@@ -35,8 +35,8 @@ const initialState: IInitState = {
 		arrivalTime: undefined,
 		cityTo: undefined,
 		cityFrom: undefined,
-		districtsToIds: undefined,
-		districtFromId: undefined
+		districtsToIds: [],
+		districtFromId: ""
 	}
 }
 
@@ -63,6 +63,17 @@ const stepperReducer = createSlice({
 		setStepForm: (state, { payload }) => {
 			state.form = { ...state.form, ...payload }
 		},
+		setStepFormDistrictsToIds: (state, { payload }) => {
+			const mergedArr = [...state.form.districtsToIds, ...[payload]]
+			state.form.districtsToIds = mergedArr.filter(
+				(row, index) => mergedArr.indexOf(row) === index
+			)
+		},
+		deleteStepFormDistrictsToIds: (state, { payload }) => {
+			state.form.districtsToIds = state.form.districtsToIds.filter(
+				(row) => row != payload
+			)
+		},
 
 		resetStepper: () => initialState
 	}
@@ -76,6 +87,8 @@ export const {
 	setStepTitle,
 
 	setStepForm,
+	setStepFormDistrictsToIds,
+	deleteStepFormDistrictsToIds,
 
 	resetStepper
 } = stepperReducer.actions

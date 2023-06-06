@@ -1,12 +1,11 @@
 import announcementApi from "./announcementApi"
 import {
 	IAnnouncementsResponse,
-	ICreateAnnouncement,
 	ILikeAnnouncement
 } from "types/Announcement/Announcement.type"
 import { IOneAnnouncementResponse } from "types/Announcement/OneAnnouncement.type"
 import { IPlaceType } from "types/IPlace/IPlace"
-import { ISession } from "types/Session/ISession"
+import { IOneSession, ISession, ISessionResponse } from "types/Session/ISession"
 import { ICity } from "types/ICity"
 
 export const announcementEndpoints = announcementApi.injectEndpoints({
@@ -64,14 +63,14 @@ export const announcementEndpoints = announcementApi.injectEndpoints({
 		// Bus
 		createBus: builder.mutation<
 			any,
-			{ number: string; typeId?: number; image: string }
+			{ number: string; typeId?: number; image: File }
 		>({
 			query: (arg) => {
 				const formData = new FormData()
 
 				formData.append("number", String(arg.number))
 				formData.append("typeId", String(arg.typeId))
-				formData.append("image", String(arg.image))
+				formData.append("image", arg.image)
 
 				return {
 					url: `/bus`,
@@ -93,6 +92,20 @@ export const announcementEndpoints = announcementApi.injectEndpoints({
 			},
 			invalidatesTags: ["session"]
 		}),
+		getSession: builder.query<ISessionResponse, any>({
+			query: (arg) => ({
+				url: `session`,
+				params: { ...arg, page: 1, limit: 100 }
+			}),
+			providesTags: ["session"]
+		}),
+		getOneSession: builder.query<IOneSession, any>({
+			query: (arg) => ({
+				url: `session/${arg}`,
+				params: { ...arg, page: 1, limit: 100 }
+			}),
+			providesTags: ["session"]
+		}),
 
 		// City
 		getCity: builder.query<ICity[], any>({
@@ -100,6 +113,24 @@ export const announcementEndpoints = announcementApi.injectEndpoints({
 				url: `city`
 			}),
 			providesTags: ["city"]
+		}),
+		getDistrict: builder.query<ICity[], any>({
+			query: (arg) => ({
+				url: `district/${arg}`
+			}),
+			providesTags: ["city"]
+		}),
+
+		// Ticket
+		createTicket: builder.mutation<any, any>({
+			query: (arg) => {
+				return {
+					url: `/ticket`,
+					method: "POST",
+					body: arg
+				}
+			},
+			invalidatesTags: ["ticket"]
 		})
 	})
 })
@@ -119,7 +150,13 @@ export const {
 
 	// Session
 	useCreateSessionMutation,
+	useGetSessionQuery,
+	useGetOneSessionQuery,
 
 	// City
-	useGetCityQuery
+	useGetCityQuery,
+	useGetDistrictQuery,
+
+	// Ticket
+	useCreateTicketMutation
 } = announcementEndpoints

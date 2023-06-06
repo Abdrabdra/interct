@@ -2,17 +2,17 @@ import { FC, useEffect } from "react"
 import { Box, Stack, Typography } from "@mui/material"
 
 import { useTypedSelector } from "@store/index"
-import { useGetAnnouncementsQuery } from "@store/rtk-api/announcement-rtk/announcementEndpoints"
+import { useGetSessionQuery } from "@store/rtk-api/announcement-rtk/announcementEndpoints"
 
 import Main from "./Main/Main"
 import ContentSkeleton from "./ContentSkeleton"
 import InfoStats from "@components/modules/InfoStat/InfoStat"
 import ContentListPagination from "./ContentListPagination"
-import { Status } from "types/enums"
+// import { Status } from "types/enums"
 
 interface Props {
 	withoutParams?: boolean
-	forMyAnnouncements?: Status
+	forMyAnnouncements?: boolean
 	getCounts?: (value: number) => void
 	withoutPagination?: boolean
 }
@@ -39,18 +39,18 @@ const ContentList: FC<Props> = ({
 		return queryWithFilterParams
 	}
 
-	const { data, isLoading, isFetching, isSuccess } = useGetAnnouncementsQuery(
+	const { data, isLoading, isFetching, isSuccess } = useGetSessionQuery(
 		getParams(),
 		{
 			refetchOnMountOrArgChange: true
 		}
 	)
 
-	useEffect(() => {
-		if (isSuccess) {
-			getCounts && getCounts(data.count)
-		}
-	}, [data])
+	// useEffect(() => {
+	// 	if (isSuccess) {
+	// 		getCounts && getCounts(data.count)
+	// 	}
+	// }, [data])
 
 	return (
 		<Stack spacing={1.5}>
@@ -61,17 +61,17 @@ const ContentList: FC<Props> = ({
 					<Typography>Нет Объявлений</Typography>
 				) : (
 					<>
-						{data.data.map((car) => (
+						{data.data.map((row) => (
 							<Box
-								key={car.id}
+								key={row.id}
 								sx={{
 									height: "146px",
 									backgroundColor: "common.white",
 									borderRadius: "10px"
 								}}
 							>
-								<Main car={car} />
-								<InfoStats views={car.views} publishDate={car.createdAt} />
+								<Main car={row} />
+								{/* <InfoStats views={row.views} publishDate={row.createdAt} /> */}
 							</Box>
 						))}
 						{withoutPagination ? null : (

@@ -1,23 +1,35 @@
 import { Box, Divider, Stack, Typography } from "@mui/material"
 import numberWithSpaces from "@utils/numberWithSpaces"
-import { StatementEnum, WheelEnum } from "types/enums"
+import React from "react"
+import { IUserMe } from "types/IUser"
+import { IDetail } from "../DoubleTab"
+// import { StatementEnum, WheelEnum } from "types/enums"
 
-const DetailsTab = ({ details }: any) => {
+const DetailsTab: React.FC<{ details?: IDetail }> = ({ details }) => {
+	const date = details?.arrivalDate && new Date(details.arrivalDate)
+
 	const stateData = [
-		{ id: 0, title: "Город", value: details.city },
-		{ id: 1, title: "Поколение", value: details.generation },
-		{ id: 2, title: "Кузов", value: details.body },
-		// { id: 3, title: "Объем двигателя", value: details.volume },
-		{ id: 4, title: "Пробег", value: details.mileage },
-		// { id: 5, title: "Коробка передач", value: details.transmission },
-		{ id: 6, title: "Привод", value: details.driveUnit },
-		{ id: 7, title: "Руль", value: details.steeringWheel },
-		{ id: 8, title: "Цвет", value: details.color },
-		{ id: 9, title: "Растаможен в КЗ", value: details.customsClearance },
-		{ id: 10, title: "Состояние", value: details.state }
+		{ id: 0, title: "Город отправления", value: details?.cityFrom.title },
+		{ id: 1, title: "Город прибытия", value: details?.cityTo.title },
+		{ id: 2, title: "Район отправления", value: details?.districtFrom.title },
+		{
+			id: 3,
+			title: "Районы прибытия",
+			value: details?.districtTo.map((row) => row.title).join(", ")
+		},
+		{
+			id: 4,
+			title: "Дата прибытия",
+			value:
+				date &&
+				date.getDate() + "." + date?.getMonth() + "." + date?.getFullYear()
+		},
+		{
+			id: 5,
+			title: "Время Прибытия",
+			value: date && date.getHours() + ":" + date.getMinutes()
+		}
 	]
-
-	console.log("stateData: ", stateData)
 
 	return (
 		<Box
@@ -49,25 +61,7 @@ const DetailsTab = ({ details }: any) => {
 									fontWeight: 500
 								}}
 							>
-								{row.id === 3
-									? `${row.value}л`
-									: row.id === 4
-									? `${numberWithSpaces(row.value)}км`
-									: row.id === 7
-									? row.value === WheelEnum.LEFT
-										? "Слева"
-										: "Справа"
-									: row.id === 9
-									? row.value
-										? "Да"
-										: "Нет"
-									: row.id === 10
-									? row.value === StatementEnum.EMERGENCY
-										? "Аварийная"
-										: row.value === StatementEnum.NEW
-										? "Новое"
-										: "Б/У"
-									: row.value}
+								{String(row?.value)}
 							</Typography>
 						</Box>
 						<Divider />

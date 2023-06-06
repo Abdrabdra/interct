@@ -3,9 +3,29 @@ import { Box, Stack, Tab, Tabs } from "@mui/material"
 
 import { a11yProps, TabPanel } from "./TabConfig"
 import { CommentsTab, DetailsTab } from "./Tabs"
+import { IUserMe } from "types/IUser"
+import { ICity } from "types/ICity"
+
+export interface IDetail {
+	cityFrom: {
+		id: number
+		title: string
+	}
+	cityTo: {
+		id: number
+		title: string
+	}
+	districtFrom: {
+		id: number
+		title: string
+	}
+	districtTo: ICity[]
+	arrivalDate: Date | undefined
+	arrivalTime: number | undefined
+}
 
 interface Props {
-	details: any
+	details?: IDetail
 	commentsCount: number
 	forPreview?: boolean
 }

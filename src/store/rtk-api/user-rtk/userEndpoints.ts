@@ -51,7 +51,7 @@ export const userEndpoints = userApi.injectEndpoints({
 			}),
 			providesTags: ["user"]
 		}),
-		createChatRoom: builder.mutation<ICreateChatRoom, {profileId: string}>({
+		createChatRoom: builder.mutation<ICreateChatRoom, { profileId: string }>({
 			query: (body) => ({
 				url: `/chat/room`,
 				method: "POST",

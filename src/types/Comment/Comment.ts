@@ -1,4 +1,4 @@
-import { TypeofEntityEnum } from "types/enums"
+// import { TypeofEntityEnum } from "types/enums"
 import { IOneComment } from "./OneComment"
 
 export interface ICommentResponse {
@@ -10,5 +10,5 @@ export interface ICreateCommentRequest {
 	parentCommentId?: number
 	announcementId: number
 	text: string
-	kind: TypeofEntityEnum
+	// kind: TypeofEntityEnum
 }

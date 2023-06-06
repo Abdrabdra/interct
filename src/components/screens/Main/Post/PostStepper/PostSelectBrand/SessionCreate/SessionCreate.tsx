@@ -7,7 +7,7 @@ import { useFormik } from "formik"
 import React from "react"
 import { useDispatch } from "react-redux"
 import { ISession } from "types/Session/ISession"
-import SessionArrivaDate from "./SessionArrivaDate"
+import SessionArrivalDate from "./SessionArrivalDate"
 
 const SessionCreate = () => {
 	const initialValues: ISession = {
@@ -28,13 +28,7 @@ const SessionCreate = () => {
 	return (
 		<form onSubmit={handleSubmit}>
 			<Stack>
-				<SessionArrivaDate />
-				<StyledMainInput
-					label="Время прибытия"
-					name="arrivalTime"
-					value={values.arrivalTime}
-					onChange={handleChange}
-				/>
+				<SessionArrivalDate />
 			</Stack>
 		</form>
 	)

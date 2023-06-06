@@ -10,40 +10,29 @@ import Tags from "./Tags"
 
 import { IAnnouncement } from "types/Announcement/Announcement.type"
 import { $image_api } from "api"
+import { ISessionData } from "types/Session/ISession"
 
 interface Props {
-	car: IAnnouncement
+	car: ISessionData
 }
 
 const Main: FC<Props> = ({ car }) => {
-	const {
-		id,
-		price,
-		model,
-		avatar,
-		year,
-		mileage,
-		volume,
-		state,
-		marka,
-		city,
-		body,
-		countImages,
-		profilelike
-	} = car
+	const { id } = car
 	const navigate = useNavigate()
 
 	const tags = {
-		year: year,
-		state: state,
-		mileage: mileage,
-		body: body,
-		volume: volume
+		year: car.bus.type.title,
+		state: car.bus.type.cost,
+		mileage: car.cityFrom.title,
+		body: car.cityTo.title,
+		volume: "Быстрый"
 	}
 
 	const handleNavigate = () => {
 		navigate(`/app/home/one/${id}`)
 	}
+
+	const date = new Date(car.arrivalDate)
 
 	return (
 		<Stack direction="row" spacing={1} sx={{ padding: "4px 8px 8px 4px" }}>
@@ -75,13 +64,13 @@ const Main: FC<Props> = ({ car }) => {
 					<Typography
 						sx={{ fontSize: "12px", fontWeight: 500, lineHeight: "14px" }}
 					>
-						{countImages}
+						1
 					</Typography>
 				</Stack>
-				{avatar && (
+				{car.bus && (
 					<Box
 						component="img"
-						src={`${$image_api}${avatar}`}
+						src={`${$image_api}${car.bus.image}`}
 						sx={{
 							backgroundRepeat: "no-repeat",
 							objectFit: "cover",
@@ -102,19 +91,30 @@ const Main: FC<Props> = ({ car }) => {
 				>
 					<Stack onClick={handleNavigate} sx={{ flex: 1 }}>
 						<Typography variant="h6">
-							{marka} {model}
+							{car.cityFrom.title} - {car.cityTo.title}
 						</Typography>
 						<Typography variant="h6" color="primary">
-							{numberWithSpaces(price)}KZT
+							{numberWithSpaces(car.bus.type.cost)}KZT
 						</Typography>
 						<Typography
 							variant="h6"
 							sx={{ fontWeight: 500, fontSize: "12px", color: "secondary.500" }}
 						>
-							г. {city}
+							{date.getDate() -
+								1 +
+								"." +
+								date?.getMonth() +
+								"." +
+								date?.getFullYear()}{" "}
+							-{" "}
+							{date.getDate() +
+								"." +
+								date?.getMonth() +
+								"." +
+								date?.getFullYear()}
 						</Typography>
 					</Stack>
-					<LikeButton profilelike={profilelike} id={id} />
+					<LikeButton profilelike={"A"} id={id} />
 				</Stack>
 				<Tags tags={tags} />
 			</Stack>

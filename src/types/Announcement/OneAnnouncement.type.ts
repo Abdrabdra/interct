@@ -1,4 +1,4 @@
-import { DriveIUnitEnum, StatementEnum, Status, WheelEnum } from "../enums"
+// import { DriveIUnitEnum, StatementEnum, Status, WheelEnum } from "../enums"
 
 export interface IOneAnnouncementResponse {
 	a: {
@@ -6,7 +6,7 @@ export interface IOneAnnouncementResponse {
 		price: number
 		description: string
 		createdAt: Date
-		status: Status
+		// status: Status
 		views: number
 		generation: {
 			createdFrom?: number
@@ -19,10 +19,10 @@ export interface IOneAnnouncementResponse {
 			id: number
 			year: number
 			mileage: number
-			steeringWheel: WheelEnum
-			driveUnit: DriveIUnitEnum
+			// steeringWheel: WheelEnum
+			// driveUnit: DriveIUnitEnum
 			volume: number
-			state: StatementEnum
+			// state: StatementEnum
 			customsClearance: boolean
 			color: string
 			phone: string

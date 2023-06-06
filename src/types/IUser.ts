@@ -10,7 +10,28 @@ export interface IUser {
 
 export interface IUserMe {
 	id: number
+	money: number
 	phone: string
+	tickets: any[]
+	bus: {
+		coordinates: null | ICoordinates
+		id: number
+		image: string
+		number: ""
+		type: IMeType
+	}
+}
+
+export interface IMeType {
+	cost: number
+	id: number
+	title: string
+}
+
+export interface ICoordinates {
+	id: number
+	lat: number
+	lon: number
 }
 
 export interface IChatRoom {
