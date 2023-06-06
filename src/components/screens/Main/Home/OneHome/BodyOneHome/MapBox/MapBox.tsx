@@ -37,8 +37,6 @@ const MapBox = () => {
 		setLong((prev) => prev + 0.0001)
 	}
 
-	console.log("viewport: ", viewport)
-
 	return (
 		<div style={{ height: "500px", width: "100%" }}>
 			{viewport.latitude && (
