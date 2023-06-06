@@ -18,7 +18,7 @@ import { IChatMessages } from "types/IUser"
 const ChatOne = React.lazy(() => import("../ChatOne"))
 
 const ChatOneWrapper = () => {
-	const { chatId: profileId } = useParams()
+	const { chatId: userId } = useParams()
 
 	const [create, { data: chatData, isLoading: isCreateChatRoomLoading }] =
 		useCreateChatRoomMutation()
@@ -40,8 +40,8 @@ const ChatOneWrapper = () => {
 	}, [isSuccess])
 
 	useEffect(() => {
-		if (profileId) {
-			create({ profileId: profileId })
+		if (userId) {
+			create({ userId: userId })
 		}
 	}, [])
 

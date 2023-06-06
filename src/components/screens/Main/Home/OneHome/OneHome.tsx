@@ -54,7 +54,7 @@ const OneHome = () => {
 								title={`${data.cityFrom.title} ${data.cityTo.title}`}
 								price={data.bus.type.cost}
 							/>
-							<Order />
+							<Order places={data.places} bus={data.bus} />
 							{/* <TagBox
 								isLike={data?.isLike}
 								likesCount={data.count.likesCount}
@@ -65,9 +65,9 @@ const OneHome = () => {
 						{/* <OptionBox data={data.a.tags} /> */}
 						{/* <SimilarBox markaId={data.a.marka.id} modelId={data.a.model.id} /> */}
 
-						<MapBox />
+						<MapBox data={data} />
 
-						<ButtonsBox profileId={data.bus.id} phone={data.bus.number} />
+						<ButtonsBox profileId={data.bus.user.id} phone={data.bus.number} />
 					</Stack>
 				) : null}
 			</Container>

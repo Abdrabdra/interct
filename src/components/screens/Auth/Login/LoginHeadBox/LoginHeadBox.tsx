@@ -17,10 +17,13 @@ const LoginHeadBox = () => {
 				sx={{
 					display: "flex",
 					justifyContent: "center",
-					marginBottom: "50px"
+					marginBottom: "20px",
+					color: "common.white",
+					fontSize: "30px",
+					fontWeight: 700
 				}}
 			>
-				<img src={AuthLogo} alt={"InterCT"} />
+				InterCT
 			</Box>
 			<Box sx={{ display: "flex", justifyContent: "center" }}>
 				<img src={AuthBg} alt={"Auth Background"} />

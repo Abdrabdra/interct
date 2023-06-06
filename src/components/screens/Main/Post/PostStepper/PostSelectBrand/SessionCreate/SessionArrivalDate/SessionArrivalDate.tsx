@@ -10,11 +10,10 @@ import { setStepForm } from "@store/reducers/stepper/stepper.slice"
 import { useTypedSelector } from "@store/index"
 
 const SessionArrivaDate = () => {
-	const [value, setValue] = React.useState<Dayjs | null>(dayjs())
+	const [value1, setValue1] = React.useState<Dayjs | null>(dayjs())
 
 	const handleChange = (value: dayjs.Dayjs | null) => {
-		setValue(value)
-		console.log("time: ", value?.get("h"), " ", value?.get("m"))
+		setValue1(value)
 	}
 
 	const dispatch = useDispatch()
@@ -25,7 +24,7 @@ const SessionArrivaDate = () => {
 				arrivalTime: Number(value?.get("h") + "." + value?.get("m"))
 			})
 		)
-		setValue(value)
+		setValue1(value)
 	}
 
 	const prevArrivaDate = useTypedSelector(
@@ -44,7 +43,7 @@ const SessionArrivaDate = () => {
 				</DemoItem>
 			</DemoContainer> */}
 			<StaticDateTimePicker
-				value={value}
+				value={value1}
 				onChange={handleChange}
 				onAccept={handleAccept}
 				ampm={false}

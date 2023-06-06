@@ -19,14 +19,14 @@ const DetailsTab: React.FC<{ details?: IDetail }> = ({ details }) => {
 		},
 		{
 			id: 4,
-			title: "Дата прибытия",
+			title: "Дата отправления",
 			value:
 				date &&
 				date.getDate() + "." + date?.getMonth() + "." + date?.getFullYear()
 		},
 		{
 			id: 5,
-			title: "Время Прибытия",
+			title: "Время отправления",
 			value: date && date.getHours() + ":" + date.getMinutes()
 		}
 	]

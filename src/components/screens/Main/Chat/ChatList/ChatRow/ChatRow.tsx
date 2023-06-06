@@ -17,7 +17,7 @@ const ChatRow: FC<Props> = ({ data }) => {
 	console.log("user: ", user)
 
 	const handleClick = () => {
-		user && navigate(`/app/chat/one/${user[0].profile.id}`)
+		user && navigate(`/app/chat/one/${user[0].id}`)
 	}
 
 	const date = new Date(data.updatedAt)
@@ -33,10 +33,10 @@ const ChatRow: FC<Props> = ({ data }) => {
 					<Avatar sx={{ width: 65, height: 65 }}></Avatar>
 					<Stack>
 						<Typography sx={{ fontSize: "12px", fontWeight: 500 }}>
-							{user && user[0].profile.firstName}
+							{user && user[0].phone}
 						</Typography>
 						<Typography sx={{ fontSize: "18px", fontWeight: 600 }}>
-							{user && user[0].profile.firstName}
+							{user && user[0].phone}
 						</Typography>
 					</Stack>
 				</Stack>

@@ -122,7 +122,10 @@ export const announcementEndpoints = announcementApi.injectEndpoints({
 		}),
 
 		// Ticket
-		createTicket: builder.mutation<any, any>({
+		createTicket: builder.mutation<
+			any,
+			{ sessionPlaceId: number; busId: number }
+		>({
 			query: (arg) => {
 				return {
 					url: `/ticket`,
@@ -130,7 +133,7 @@ export const announcementEndpoints = announcementApi.injectEndpoints({
 					body: arg
 				}
 			},
-			invalidatesTags: ["ticket"]
+			invalidatesTags: ["ticket", "session"]
 		})
 	})
 })

@@ -23,7 +23,7 @@ const ChooseMark: FC<Props> = ({ handleChangeQuery, chosenValues }) => {
 
 	return (
 		<Stack>
-			<Typography>Выбор марки</Typography>
+			<Typography>Выбор города</Typography>
 
 			<Stack>
 				<MainButton
@@ -39,7 +39,7 @@ const ChooseMark: FC<Props> = ({ handleChangeQuery, chosenValues }) => {
 						}
 					}}
 				>
-					Выберите марку
+					Выберите город
 				</MainButton>
 
 				<BaseModal open={open} handleModalClose={handleModalClose}>

@@ -1,15 +1,26 @@
 import { MainButton } from "@components/ui/Button"
 import { useCreateTicketMutation } from "@store/rtk-api/announcement-rtk/announcementEndpoints"
+import { useGetUserMeQuery } from "@store/rtk-api/user-rtk/userEndpoints"
 import React from "react"
 import { useParams } from "react-router-dom"
-
-const Order = () => {
+import { IPlace } from "types/Session/ISession"
+interface Props {
+	places: IPlace[]
+	bus: {
+		id: number
+	}
+}
+const Order: React.FC<Props> = ({ places, bus }) => {
 	const { announceId } = useParams()
+
+	const { data } = useGetUserMeQuery("")
 
 	const [create] = useCreateTicketMutation()
 
 	const handleClick = () => {
-		announceId && create({ id: Number(announceId), row: 1, column: 1 })
+		announceId &&
+			data &&
+			create({ busId: bus.id, sessionPlaceId: places[0].id })
 	}
 
 	return (

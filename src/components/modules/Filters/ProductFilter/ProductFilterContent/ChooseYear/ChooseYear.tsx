@@ -37,7 +37,7 @@ const ChooseYear: FC<Props> = ({ handleChangeQuery }) => {
 
 	return (
 		<Stack>
-			<Typography>Год выпуска (Г.)</Typography>
+			<Typography>По времени</Typography>
 			<Stack direction={"row"} spacing={2.5}>
 				<Stack>
 					<Typography>От</Typography>

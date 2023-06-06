@@ -65,8 +65,13 @@ export interface IOneSession {
 			lat: number
 			lon: number
 		}
+		user: {
+			id: number
+			money: number
+			phone: string
+		}
 	}
-	places: []
+	places: IPlace[]
 	districtFrom: {
 		id: number
 		title: string
@@ -85,4 +90,15 @@ export interface IOneSession {
 			title: string
 		}
 	]
+}
+
+export interface IPlace {
+	id: number
+	taken: boolean
+	place: {
+		id: number
+		column: number
+		floor: number
+		row: number
+	}
 }

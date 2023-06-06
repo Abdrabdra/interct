@@ -45,7 +45,7 @@ export interface IChatRoom {
 export interface IChatRoomUser {
 	id: number
 	phone: string
-	profile: { id: number; firstName: string }
+	money: number
 }
 
 export interface IChatMessages {

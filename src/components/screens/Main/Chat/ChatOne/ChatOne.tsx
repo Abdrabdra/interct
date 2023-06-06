@@ -6,6 +6,7 @@ import { useTypedSelector } from "@store/index"
 import ChatOneMessages from "./ChatOneMessages"
 import { IChatMessages, ICreateChatRoom } from "types/IUser"
 import ChatOneTopDrawer from "./ChatOneTopDrawer"
+import { useParams } from "react-router-dom"
 
 type Props = {
 	messages: IChatMessages[]
@@ -34,12 +35,13 @@ const ChatOne: React.FC<Props> = ({
 		handleSetNewMessages(data)
 	})
 
-	const userId = useTypedSelector((state) => state.auth.userId)
-	const secondUser = chatData.users.filter((row) => row.id !== Number(userId))
+	const { chatId: userId } = useParams()
+
+	const secondUser = chatData.users.filter((row) => row.id === Number(userId))
 
 	return (
 		<Box>
-			<ChatOneTopDrawer name={secondUser[0].profile.firstName} />
+			<ChatOneTopDrawer name={secondUser[0]?.phone} />
 
 			<Container>
 				{messages && <ChatOneMessages messages={messages} />}
