@@ -8,50 +8,57 @@ import { Button } from "@mui/material"
 import AirportShuttleIcon from "@mui/icons-material/AirportShuttle"
 
 const MapBox = () => {
-	const [viewport, setViewport] = useState({
-		latitude: 42.348727,
-		longitude: 69.568115,
-		zoom: 15
-	})
+	const [viewport, setViewport] = useState<{
+		latitude?: number
+		longitude?: number
+		zoom: number
+	}>({ latitude: undefined, longitude: undefined, zoom: 15 })
 
-	// useEffect(() => {
-	// 	navigator.geolocation.getCurrentPosition((pos) => {
-	// 		setViewport({
-	// 			width: "100vw",
-	// 			height: "100vh",
-	// 			zoom: 15
-	// 		})
-	// 	})
-	// }, [])
+	useEffect(() => {
+		navigator.geolocation.getCurrentPosition((pos) => {
+			setViewport({
+				latitude: pos.coords.latitude,
+				longitude: pos.coords.longitude,
+				// width: "100vw",
+				// height: "100vh",
+				zoom: 15
+			})
+		})
+	}, [])
 
 	const [lat, setLat] = useState(42.348727)
 	const [long, setLong] = useState(69.568115)
 
 	const handleClick = () => {
+		setLat((prev) => prev + 0.0001)
 		setLong((prev) => prev + 0.0001)
 	}
 
+	console.log("viewport: ", viewport)
+
 	return (
 		<div style={{ height: "500px", width: "100%" }}>
-			<Map
-				mapboxAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
-				// {...viewport}
-				initialViewState={viewport}
-				// @ts-ignore
-				// onViewPortChange={(viewport) => setViewport(viewport)}
-				mapStyle="mapbox://styles/mapbox/streets-v11"
-			>
-				<GeolocateControl
-					positionOptions={{ enableHighAccuracy: true }}
-					trackUserLocation={true}
-				/>
-				<Marker latitude={lat} longitude={long}>
-					<Button
-						startIcon={<AirportShuttleIcon />}
-						onClick={handleClick}
-					></Button>
-				</Marker>
-			</Map>
+			{viewport.latitude && (
+				<Map
+					mapboxAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+					// {...viewport}
+					initialViewState={viewport}
+					// @ts-ignore
+					onViewPortChange={(viewport) => setViewport(viewport)}
+					mapStyle="mapbox://styles/mapbox/streets-v11"
+				>
+					<GeolocateControl
+						positionOptions={{ enableHighAccuracy: true }}
+						trackUserLocation={true}
+					/>
+					<Marker latitude={lat} longitude={long}>
+						<Button
+							startIcon={<AirportShuttleIcon />}
+							onClick={handleClick}
+						></Button>
+					</Marker>
+				</Map>
+			)}
 		</div>
 	)
 }

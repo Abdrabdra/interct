@@ -1,6 +1,6 @@
 import axios from "axios"
 
-export const DEV_API = "http://164.92.129.220/"
+export const DEV_API = "https://api.7kzu.kz/"
 // export const DEV_API = "https://api.avtolike.kz/"
 // export const DEV_API = "http://localhost:3000/"
 // export const PROD_API = "https://";
