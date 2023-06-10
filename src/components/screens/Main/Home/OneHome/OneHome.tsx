@@ -54,7 +54,7 @@ const OneHome = () => {
 								title={`${data.cityFrom.title} ${data.cityTo.title}`}
 								price={data.bus.type.cost}
 							/>
-							<Order places={data.places} bus={data.bus} />
+							<Order data={data} places={data.places} bus={data.bus} />
 							{/* <TagBox
 								isLike={data?.isLike}
 								likesCount={data.count.likesCount}

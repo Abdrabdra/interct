@@ -17,6 +17,7 @@ import storage from "redux-persist/lib/storage"
 import authReducer from "./reducers/auth/auth.slice"
 import stepperReducer from "./reducers/stepper/stepper.slice"
 import filterReducer from "./reducers/filter/filter.slice"
+import orderReducer from "./reducers/order/order.slice"
 
 //rtk
 import announcementApi from "./rtk-api/announcement-rtk/announcementApi"
@@ -44,6 +45,7 @@ const rootReducer = combineReducers({
 	auth: persistReducer(AuthPersistConfig, authReducer),
 	stepper: persistReducer(StepperPersistConfig, stepperReducer),
 	filter: filterReducer,
+	order: orderReducer,
 
 	[announcementApi.reducerPath]: announcementApi.reducer,
 	[commentApi.reducerPath]: commentApi.reducer,
