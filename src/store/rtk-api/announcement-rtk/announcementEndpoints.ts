@@ -7,6 +7,7 @@ import { IOneAnnouncementResponse } from "types/Announcement/OneAnnouncement.typ
 import { IPlaceType } from "types/IPlace/IPlace"
 import { IOneSession, ISession, ISessionResponse } from "types/Session/ISession"
 import { ICity } from "types/ICity"
+import { ITicket } from "types/ITicket"
 
 export const announcementEndpoints = announcementApi.injectEndpoints({
 	endpoints: (builder) => ({
@@ -134,6 +135,12 @@ export const announcementEndpoints = announcementApi.injectEndpoints({
 				}
 			},
 			invalidatesTags: ["ticket", "session"]
+		}),
+		getTickets: builder.query<ITicket[], any>({
+			query: (arg) => ({
+				url: `ticket`
+			}),
+			providesTags: ["ticket"]
 		})
 	})
 })
@@ -161,5 +168,6 @@ export const {
 	useGetDistrictQuery,
 
 	// Ticket
-	useCreateTicketMutation
+	useCreateTicketMutation,
+	useGetTicketsQuery
 } = announcementEndpoints

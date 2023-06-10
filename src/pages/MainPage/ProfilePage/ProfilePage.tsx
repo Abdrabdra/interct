@@ -1,3 +1,4 @@
+import ProfileTicketsPage from "@components/screens/Main/Profile/ProfileTickets/ProfileTicketsPage"
 import React from "react"
 import { Route, Routes } from "react-router-dom"
 
@@ -57,6 +58,7 @@ const ProfilePage = () => {
 
 				<Route path="stats" element={<ProfileStatisticPage />} />
 				<Route path="announcements" element={<ProfileAnnouncementsPage />} />
+				<Route path="tickets" element={<ProfileTicketsPage />} />
 
 				<Route path="*" element={<Profile />} />
 			</Route>

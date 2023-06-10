@@ -12,6 +12,7 @@ import { resetStepper } from "@store/reducers/stepper/stepper.slice"
 import { useNavigate } from "react-router-dom"
 import { useGetUserMeQuery } from "@store/rtk-api/user-rtk/userEndpoints"
 import { useGetAdminAnnouncementsQuery } from "@store/rtk-api/announcement-rtk/announcementEndpoints"
+import ProfileTickets from "./ProfileTickets"
 
 const ProfileContent = () => {
 	const dispatch = useDispatch<AppDispatch>()
@@ -41,6 +42,7 @@ const ProfileContent = () => {
 			</Stack>
 
 			<ProfileAnnouncements data={announceData} />
+			<ProfileTickets />
 
 			<Button onClick={handleLogOut} variant="outlined" color="error">
 				Выйти
