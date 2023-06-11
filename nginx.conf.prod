@@ -1,22 +1,10 @@
 server {
      listen 80;
-     server_name 167.99.132.142 avtolike.kz;
+     server_name 7kzu.kz;
      location ~ /.well-known/acme-challenge {
             allow all;
             root /var/www/html;
      }
-
-     return 301 https://avtolike.kz$request_uri;
-
-}
-server {
-     listen 443 ssl http2;
-     listen [::]:443  ssl http2;
-     server_name avtolike.kz www.avtolike.kz;
-     client_max_body_size 100M;
-     server_tokens off;
-     ssl_certificate /etc/letsencrypt/live/avtolike.kz/fullchain.pem;
-     ssl_certificate_key /etc/letsencrypt/live/avtolike.kz/privkey.pem;
 
      location / {
        add_header 'Access-Control-Allow-Origin' $http_origin;
@@ -25,4 +13,5 @@ server {
        proxy_pass http://client:3000/;
 
    }
+
 }
