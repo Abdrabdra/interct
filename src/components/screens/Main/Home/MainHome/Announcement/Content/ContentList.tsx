@@ -36,7 +36,7 @@ const ContentList: FC<Props> = ({
 			return {}
 		}
 
-		return queryWithFilterParams
+		return {...queryWithFilterParams, marks: undefined, cityFromId: queryWithFilterParams.marks}
 	}
 
 	const { data, isLoading, isFetching, isSuccess } = useGetSessionQuery(

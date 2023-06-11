@@ -1,5 +1,6 @@
 import { Checkbox, FormControlLabel, Stack } from "@mui/material"
 import { useTypedSelector } from "@store/index"
+import { useGetCityQuery } from "@store/rtk-api/announcement-rtk/announcementEndpoints"
 
 import { useGetMarkaQuery } from "@store/rtk-api/marka-rtk/markaEndpoints"
 import React, { FC, useEffect, useState } from "react"
@@ -11,7 +12,7 @@ interface Props {
 }
 
 const MarkList: FC<Props> = ({ handleChangeQuery, chosenValues }) => {
-	const { data, isLoading, isSuccess } = useGetMarkaQuery({})
+	const { data, isLoading, isSuccess } = useGetCityQuery("")
 
 	const [marks, setMarks] = useState<number[]>(chosenValues)
 
@@ -38,7 +39,7 @@ const MarkList: FC<Props> = ({ handleChangeQuery, chosenValues }) => {
 			{isLoading
 				? "Загрузка..."
 				: isSuccess
-				? data.data.map((row) => (
+				? data.map((row) => (
 						<MarkOne
 							key={row.id}
 							id={row.id}
