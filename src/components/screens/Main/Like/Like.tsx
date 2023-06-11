@@ -3,15 +3,23 @@ import { Stack } from "@mui/material"
 import LikeHeader from "./LikeHeader"
 import LikeImages from "./LikeImages"
 import LikeFooter from "./LikeFooter"
-import { useGetAnnouncementsQuery } from "@store/rtk-api/announcement-rtk/announcementEndpoints"
+import {
+	useGetAnnouncementsQuery,
+	useGetSessionQuery
+} from "@store/rtk-api/announcement-rtk/announcementEndpoints"
 import ViewHeightBox from "@components/modules/ViewHeightBox"
+import { useEffect } from "react"
 
 const Like = () => {
 	const queryParams = {
-		favorites: true
+		like: true
 	}
 
-	const { data, isSuccess } = useGetAnnouncementsQuery(queryParams)
+	const { data, isSuccess, refetch } = useGetSessionQuery(queryParams)
+
+	useEffect(() => {
+		refetch()
+	}, [])
 
 	return (
 		<Stack spacing={3}>
@@ -19,7 +27,7 @@ const Like = () => {
 				data?.data.map((row) => (
 					<Stack spacing={1} key={row.id}>
 						<LikeHeader data={row} />
-						<LikeImages data={row.avatar} />
+						<LikeImages data={row.bus.image} />
 						<LikeFooter data={row} />
 					</Stack>
 				))

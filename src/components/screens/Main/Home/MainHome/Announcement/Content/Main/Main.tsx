@@ -114,7 +114,7 @@ const Main: FC<Props> = ({ car }) => {
 								date?.getFullYear()}
 						</Typography>
 					</Stack>
-					<LikeButton profilelike={"A"} id={id} />
+					{car.likes && <LikeButton profilelike={car?.likes[0]?.id} id={id} />}
 				</Stack>
 				<Tags tags={tags} />
 			</Stack>

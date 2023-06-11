@@ -9,9 +9,10 @@ import "swiper/css/navigation"
 import "./LikeImages.style.scss"
 import { FC } from "react"
 import { $image_api } from "api"
+import { IOneSession } from "types/Session/ISession"
 
 interface Props {
-	data: string | null
+	data: string
 }
 
 const LikeImages: FC<Props> = ({ data }) => {

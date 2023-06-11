@@ -11,9 +11,10 @@ import { useTypedSelector } from "@store/index"
 import NeedAuthBox from "@components/modules/NeedAuthBox"
 import { useDispatch } from "react-redux"
 import { setAuth } from "@store/reducers/auth/auth.slice"
+import announcementApi from "@store/rtk-api/announcement-rtk/announcementApi"
 
 interface Props {
-	profilelike: string
+	profilelike?: number
 	id: number
 }
 
@@ -28,11 +29,12 @@ const LikeButton: FC<Props> = ({ profilelike, id }) => {
 
 	const [like] = useLikeAnnouncementMutation()
 
-	const handleIconClick = () => {
+	const handleIconClick = async () => {
 		const token = localStorage.getItem("access_token")
 
 		if (token && isAuth) {
-			return like({ sessionId: id })
+			await like({ sessionId: id })
+			return dispatch(announcementApi.util.invalidateTags(["session"]))
 		}
 
 		localStorage.removeItem("access_item")
@@ -60,7 +62,7 @@ const LikeButton: FC<Props> = ({ profilelike, id }) => {
 				}}
 			>
 				<Icon
-					component={iconClick === "0" ? FavoriteBorderIcon : FavoriteIcon}
+					component={!iconClick ? FavoriteBorderIcon : FavoriteIcon}
 				/>
 			</IconButton>
 			<BaseModal open={open} handleModalClose={handleModalClose}>

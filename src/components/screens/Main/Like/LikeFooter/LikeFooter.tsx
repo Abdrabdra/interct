@@ -2,14 +2,15 @@ import { Box, Container, Stack, Typography } from "@mui/material"
 import { toMonthName } from "@utils/toMonthName"
 import { FC } from "react"
 import { IAnnouncement } from "types/Announcement/Announcement.type"
+import { ISessionData } from "types/Session/ISession"
 import LikeButtons from "./LikeButtons"
 
 interface Props {
-	data: IAnnouncement
+	data: ISessionData
 }
 
 const LikeFooter: FC<Props> = ({ data }) => {
-	const date = new Date(data.createdAt)
+	const date = new Date(data.arrivalDate)
 
 	return (
 		<Box>

@@ -5,9 +5,10 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos"
 import { FC } from "react"
 import { useNavigate } from "react-router-dom"
 import { IAnnouncement } from "types/Announcement/Announcement.type"
+import { ISessionData } from "types/Session/ISession"
 
 interface Props {
-	data: IAnnouncement
+	data: ISessionData
 }
 
 const LikeHeader: FC<Props> = ({ data }) => {
@@ -22,7 +23,7 @@ const LikeHeader: FC<Props> = ({ data }) => {
 			<Stack direction="row" justifyContent="space-between">
 				<Stack direction="row" spacing={1.5} alignItems="center">
 					<PersonIcon />
-					<Typography>{`${data.marka} ${data.model}`}</Typography>
+					<Typography>{`${data.cityFrom.title} ${data.cityTo.title}`}</Typography>
 				</Stack>
 				<Button onClick={handleNavigate}>
 					Перейти <ArrowForwardIosIcon />

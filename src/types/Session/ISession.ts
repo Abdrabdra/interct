@@ -17,7 +17,7 @@ export interface ISessionData {
 	id: number
 	arrivalDate: Date
 	arrivalTime: number
-	likes: []
+	likes: ILikes[] | []
 	status: string
 	cityFrom: {
 		id: number
@@ -37,6 +37,10 @@ export interface ISessionData {
 			cost: number
 		}
 	}
+}
+
+interface ILikes {
+	id: number
 }
 
 export interface IOneSession {

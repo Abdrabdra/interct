@@ -161,6 +161,7 @@ export const {
 	// Session
 	useCreateSessionMutation,
 	useGetSessionQuery,
+	useLazyGetOneSessionQuery,
 	useGetOneSessionQuery,
 
 	// City
