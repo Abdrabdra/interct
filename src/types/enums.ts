@@ -3,3 +3,7 @@ export enum SessionStatus {
 	InTransit = "inTransit",
 	FINISH = "finish"
 }
+
+export enum TestEnum {
+	test = "test"
+}
