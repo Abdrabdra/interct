@@ -26,6 +26,7 @@ import CloseIcon from "@mui/icons-material/Close"
 import { useTypedSelector } from "@store/index"
 import { useDispatch } from "react-redux"
 import { setTicket, setTicketReset } from "@store/reducers/order/order.slice"
+import OrderTypes from "./OrderTypes"
 
 const Transition = React.forwardRef(function Transition(
 	props: TransitionProps & {
@@ -124,23 +125,7 @@ const Order: React.FC<Props> = ({ places, bus, data }) => {
 								date?.getFullYear()}
 						</Typography>
 
-						<Stack
-							direction="row"
-							p={2}
-							justifyContent={"flex-start"}
-							alignItems={"flex-start"}
-							sx={{
-								border: "1px solid",
-								borderColor: "grey.100",
-								borderRadius: "10px",
-								flexWrap: "wrap",
-								gap: "8px"
-							}}
-						>
-							{places.map((row) => (
-								<OrderButton id={row.id} title={row.id} isTaken={row.taken} />
-							))}
-						</Stack>
+						<OrderTypes bus={bus} places={places} />
 					</Stack>
 				</Container>
 				{isTicket ? (
@@ -206,7 +191,7 @@ const Order: React.FC<Props> = ({ places, bus, data }) => {
 							>
 								<Stack>
 									<Typography variant="h6">
-										Выбрано {selectedTicket.id}
+										Выбрано {selectedTicket.title}
 									</Typography>
 									<Typography sx={{ fontSize: "12px" }}>
 										Цена {data?.bus.type.cost}
@@ -232,7 +217,7 @@ const Order: React.FC<Props> = ({ places, bus, data }) => {
 
 export default Order
 
-const OrderButton: React.FC<{
+export const OrderButton: React.FC<{
 	id: number
 	title: string | number
 	isTaken: boolean
