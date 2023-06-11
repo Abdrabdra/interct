@@ -6,7 +6,7 @@ export const commentEndpoints = commentApi.injectEndpoints({
 	endpoints: (builder) => ({
 		getComments: builder.query<
 			ICommentResponse,
-			{ carId?: string; parentId?: number }
+			{ busId?: string; parentId?: number }
 		>({
 			query: (arg) => {
 				return {

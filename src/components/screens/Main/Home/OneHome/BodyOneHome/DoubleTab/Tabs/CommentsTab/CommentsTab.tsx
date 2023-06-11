@@ -24,7 +24,7 @@ const CommentsTab: FC<Props> = ({ commentsCount, forPreview }) => {
 	const { announceId } = useParams()
 
 	const queryParams = {
-		carId: announceId
+		busId: announceId
 	}
 
 	const { data, isLoading, isSuccess } = useGetCommentsQuery(queryParams, {
