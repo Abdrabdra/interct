@@ -8,6 +8,10 @@ import { useCreateCommentMutation } from "@store/rtk-api/comments-rtk/commentEnd
 import { StyledMainInput } from "@components/ui/Input"
 import { MainButton } from "@components/ui/Button"
 import { FC, useEffect } from "react"
+import {
+	useGetOneSessionQuery,
+	useGetSessionQuery
+} from "@store/rtk-api/announcement-rtk/announcementEndpoints"
 
 interface Props {
 	parentCommentId?: number
@@ -17,8 +21,10 @@ const CommentsTabCreate: FC<Props> = ({ parentCommentId }) => {
 	const { announceId } = useParams()
 	const [create, { isSuccess }] = useCreateCommentMutation()
 
+	const { data: sessionData } = useGetOneSessionQuery(announceId)
+
 	const body = announceId && {
-		busId: Number(announceId),
+		busId: Number(sessionData?.bus.id),
 		parentId: parentCommentId ? parentCommentId : undefined,
 		text: ""
 		// kind: TypeofEntityEnum.ANNOUNCEMENT

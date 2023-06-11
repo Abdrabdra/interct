@@ -14,6 +14,7 @@ import { useGetCommentsQuery } from "@store/rtk-api/comments-rtk/commentEndpoint
 import CommentsTabSkeleton from "./CommentsTabSkeleton"
 import CommentsTabOne from "./CommentsTabOne"
 import CommentsTabCreate from "./CommentsTabCreate"
+import { useGetOneSessionQuery } from "@store/rtk-api/announcement-rtk/announcementEndpoints"
 
 interface Props {
 	commentsCount?: number
@@ -23,8 +24,10 @@ interface Props {
 const CommentsTab: FC<Props> = ({ commentsCount, forPreview }) => {
 	const { announceId } = useParams()
 
+	const { data: sessionData } = useGetOneSessionQuery(announceId)
+
 	const queryParams = {
-		busId: announceId
+		busId: String(sessionData?.bus.id)
 	}
 
 	const { data, isLoading, isSuccess } = useGetCommentsQuery(queryParams, {
