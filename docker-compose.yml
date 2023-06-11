@@ -28,7 +28,7 @@ services:
     volumes:
       - www-html:/var/www/html
       - etc-letsencrypt:/etc/letsencrypt
-    command: certonly --webroot --webroot-path=/var/www/html --email avtolikekz@gmail.com  --agree-tos --no-eff-email -d avtolike.kz
+    command: certonly --webroot --webroot-path=/var/www/html --email avtolikekz@gmail.com  --agree-tos --no-eff-email -d 7kzu.kz
 
 
 volumes:
