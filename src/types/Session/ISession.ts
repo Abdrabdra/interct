@@ -17,6 +17,7 @@ export interface ISessionData {
 	id: number
 	arrivalDate: Date
 	arrivalTime: number
+	likes: []
 	status: string
 	cityFrom: {
 		id: number

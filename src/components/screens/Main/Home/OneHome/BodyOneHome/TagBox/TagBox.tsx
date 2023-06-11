@@ -33,7 +33,7 @@ const TagBox: FC<Props> = ({ likesCount, isLike }) => {
 
 		if (token && isAuth && announceId) {
 			return likeAnnouncement({
-				announcementId: Number(announceId),
+				sessionId: Number(announceId),
 				// kind: TypeofEntityEnum.ANNOUNCEMENT
 			})
 		}

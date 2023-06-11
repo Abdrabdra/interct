@@ -32,7 +32,7 @@ export interface IAnnouncement {
 }
 
 export interface ILikeAnnouncement {
-	announcementId: number
+	sessionId: number
 	// kind: TypeofEntityEnum
 }
 

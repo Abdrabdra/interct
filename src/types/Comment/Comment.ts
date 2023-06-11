@@ -7,8 +7,8 @@ export interface ICommentResponse {
 }
 
 export interface ICreateCommentRequest {
-	parentCommentId?: number
-	announcementId: number
+	parentId?: number
+	busId: number
 	text: string
 	// kind: TypeofEntityEnum
 }

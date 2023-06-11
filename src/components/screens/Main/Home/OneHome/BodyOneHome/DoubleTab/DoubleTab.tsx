@@ -54,7 +54,7 @@ const DoubleTab: React.FC<Props> = ({ details, commentsCount, forPreview }) => {
 					<DetailsTab details={details} />
 				</TabPanel>
 				<TabPanel value={value} index={1}>
-					<CommentsTab commentsCount={commentsCount} forPreview={forPreview} />
+					<CommentsTab forPreview={forPreview} />
 				</TabPanel>
 			</Box>
 		</Stack>

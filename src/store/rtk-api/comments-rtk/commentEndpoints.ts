@@ -10,7 +10,7 @@ export const commentEndpoints = commentApi.injectEndpoints({
 		>({
 			query: (arg) => {
 				return {
-					url: "/comments",
+					url: "/comment",
 					params: { ...arg }
 				}
 			},
@@ -18,7 +18,7 @@ export const commentEndpoints = commentApi.injectEndpoints({
 		}),
 		createComment: builder.mutation<string, ICreateCommentRequest>({
 			query: (body) => ({
-				url: `/comments`,
+				url: `/comment`,
 				method: "POST",
 				body
 			}),

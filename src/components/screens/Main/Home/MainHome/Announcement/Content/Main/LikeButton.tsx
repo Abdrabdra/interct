@@ -32,7 +32,7 @@ const LikeButton: FC<Props> = ({ profilelike, id }) => {
 		const token = localStorage.getItem("access_token")
 
 		if (token && isAuth) {
-			// return like({ announcementId: id, kind: TypeofEntityEnum.ANNOUNCEMENT })
+			return like({ sessionId: id })
 		}
 
 		localStorage.removeItem("access_item")

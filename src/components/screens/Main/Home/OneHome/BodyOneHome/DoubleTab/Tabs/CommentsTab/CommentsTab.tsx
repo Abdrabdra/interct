@@ -16,7 +16,7 @@ import CommentsTabOne from "./CommentsTabOne"
 import CommentsTabCreate from "./CommentsTabCreate"
 
 interface Props {
-	commentsCount: number
+	commentsCount?: number
 	forPreview?: boolean
 }
 
@@ -33,7 +33,7 @@ const CommentsTab: FC<Props> = ({ commentsCount, forPreview }) => {
 
 	return (
 		<Stack spacing={4}>
-			{commentsCount === 0 || forPreview === true ? (
+			{forPreview === true ? (
 				<Stack
 					justifyContent="center"
 					alignItems="center"
@@ -51,7 +51,6 @@ const CommentsTab: FC<Props> = ({ commentsCount, forPreview }) => {
 			) : isSuccess ? (
 				<Stack spacing={2}>
 					<CommentsTabCreate />
-
 					<Stack spacing={4}>
 						{data.data.map((row) => (
 							<CommentsTabOne key={row.id} row={row} />

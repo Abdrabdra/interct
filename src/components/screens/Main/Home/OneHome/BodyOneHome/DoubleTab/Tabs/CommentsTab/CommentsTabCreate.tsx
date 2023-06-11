@@ -1,4 +1,4 @@
-import { Formik } from "formik"
+import { Formik, useFormik } from "formik"
 import { Stack } from "@mui/material"
 import { useParams } from "react-router-dom"
 
@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom"
 import { useCreateCommentMutation } from "@store/rtk-api/comments-rtk/commentEndpoints"
 import { StyledMainInput } from "@components/ui/Input"
 import { MainButton } from "@components/ui/Button"
-import { FC } from "react"
+import { FC, useEffect } from "react"
 
 interface Props {
 	parentCommentId?: number
@@ -15,13 +15,30 @@ interface Props {
 
 const CommentsTabCreate: FC<Props> = ({ parentCommentId }) => {
 	const { announceId } = useParams()
-	const [create] = useCreateCommentMutation()
+	const [create, { isSuccess }] = useCreateCommentMutation()
 
 	const body = announceId && {
-		announcementId: Number(announceId),
-		parentCommentId: parentCommentId ? parentCommentId : undefined,
-		text: "",
+		busId: Number(announceId),
+		parentId: parentCommentId ? parentCommentId : undefined,
+		text: ""
 		// kind: TypeofEntityEnum.ANNOUNCEMENT
+	}
+
+	const formik = useFormik({
+		initialValues: { text: "" },
+		onSubmit: (values) => {
+			body && create({ ...body, ...values })
+		}
+	})
+
+	const { values, handleSubmit, handleChange, resetForm } = formik
+
+	useEffect(() => {
+		handleReset()
+	}, [isSuccess])
+
+	const handleReset = () => {
+		resetForm()
 	}
 
 	return (
@@ -32,28 +49,19 @@ const CommentsTabCreate: FC<Props> = ({ parentCommentId }) => {
 				backgroundColor: "common.white"
 			}}
 		>
-			<Formik
-				initialValues={{ text: "" }}
-				onSubmit={(values) => {
-					body && create({ ...body, ...values })
-				}}
-			>
-				{({ handleSubmit, handleChange, errors, values }) => (
-					<form onSubmit={handleSubmit}>
-						<Stack spacing={1}>
-							<StyledMainInput
-								bgcolor="grey.200"
-								type="text"
-								onChange={handleChange}
-								value={values.text}
-								name="text"
-								label={"Напишите комментарий"}
-							/>
-							<MainButton type="submit">Отправить</MainButton>
-						</Stack>
-					</form>
-				)}
-			</Formik>
+			<form onSubmit={handleSubmit}>
+				<Stack spacing={1}>
+					<StyledMainInput
+						bgcolor="grey.200"
+						type="text"
+						onChange={handleChange}
+						value={values.text}
+						name="text"
+						label={"Напишите комментарий"}
+					/>
+					<MainButton type="submit">Отправить</MainButton>
+				</Stack>
+			</form>
 		</Stack>
 	)
 }
