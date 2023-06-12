@@ -40,6 +40,9 @@ interface Props {
 	places: IPlace[]
 	bus: {
 		id: number
+		type: {
+			id: number
+		}
 	}
 	data?: IOneSession
 }
@@ -221,7 +224,8 @@ export const OrderButton: React.FC<{
 	id: number
 	title: string | number
 	isTaken: boolean
-}> = ({ title, id, isTaken }) => {
+	forBus?: boolean
+}> = ({ title, id, isTaken, forBus }) => {
 	const dispatch = useDispatch()
 
 	const ticket = useTypedSelector((state) => state.order.values)
@@ -242,7 +246,8 @@ export const OrderButton: React.FC<{
 			sx={{
 				minWidth: "36px",
 				width: "36px",
-				height: "36px"
+				height: "36px",
+				flex: forBus ? "0 0 calc(25% - 8px * 3 / 4)" : null
 			}}
 		>
 			{title}
